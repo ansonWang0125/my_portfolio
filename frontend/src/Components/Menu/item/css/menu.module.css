@@ -1,0 +1,21 @@
+.sideitem{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    color:#B2BAC2;
+    text-decoration:none;
+}
+
+.linkText{
+    padding-left: 16px;
+}
+
+.sidenav {
+    width: 250px;
+    transition: width 0.3s ease-in-out;
+    height: 100vh;
+    background-color: rgb(10,25,41);
+    padding-top:28px;
+}
+  

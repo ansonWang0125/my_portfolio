@@ -1,0 +1,16 @@
+.navbar{
+    background-color: rgb(10,25,41);
+    height:50px;
+    width:100%;
+    position:flex;
+}
+.navbar-toggler{
+    background-color:#0E0C5D;
+    border-style: solid;
+    border-width: thin;
+    border-color:#FCFCFD ;
+    border-radius:5px;
+    position:absolute;
+    top:10px;
+    left:10px;
+}
