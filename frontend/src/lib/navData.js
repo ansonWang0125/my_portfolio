@@ -13,8 +13,8 @@ export const navData = [
     {
         id: 1,
         icon: <ArticleIcon/>,
-        text: "Article",
-        link: "Article"
+        text: "Website Articles",
+        link: "Website_Articles"
     },
     {
         id: 2,
@@ -25,7 +25,7 @@ export const navData = [
     {
         id: 3,
         icon: <SettingsIcon/>,
-        text: "Undecide",
-        link: "Undecide"
+        text: "Other Articles",
+        link: "Other_Articles"
     }
 ]

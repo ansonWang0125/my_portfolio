@@ -3,9 +3,7 @@ import {NavLink} from "react-router-dom";
 import React from 'react';
 import styles from'./css/menu.module.css'
 import './css/nav.css';
-
-export default class Item extends React.Component {
-    render() {
+const Item = () => {
     
     return (
         <div id='navbarToggleExternalContent' >
@@ -18,5 +16,6 @@ export default class Item extends React.Component {
             </div>
         </div>
     );
-    }
 }
+
+export default Item

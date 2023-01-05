@@ -1,20 +1,20 @@
 import React from 'react';
 import './css/Head.css';
+import {UseTitleContext} from '../../Context/TitleContextProvider'
 
-class ShareHead extends React.Component {
+const ShareHead = () => {
+  const {title} = UseTitleContext;
 
-    render() {
-      return (
-        <div className="share-head">
-          <div  className = 'header1'>
-  
-              <div className ='start'>
-                <span> My portfolio</span>
-              </div>
+  return (
+    <div className="share-head">
+      <div  className = 'header1'>
+
+          <div className ='start'>
+            <span> {title}</span>
           </div>
-        </div>
-      );
-    }
+      </div>
+    </div>
+  );
   }
 
 export default ShareHead;

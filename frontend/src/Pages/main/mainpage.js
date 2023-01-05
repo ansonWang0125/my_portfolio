@@ -1,15 +1,15 @@
-import React from 'react';
 import Head from './Head';
+import React from 'react';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 
-const Work = () => {
+const Mainpage = () => {
     const {changeTitle} = UseTitleContext();
-    changeTitle('Work');
+    changeTitle('My portfolio');
     return (
-        <div className="Work">
+        <div className="main">
             <Head />
         </div>
     );
 }
 
-export default Work;
+export default Mainpage;

@@ -1,4 +1,4 @@
-.sideitem{
+.login{
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -9,13 +9,5 @@
 
 .linkText{
     padding-left: 16px;
-}
-
-.sidenav {
-    width: 250px;
-    transition: width 0.3s ease-in-out;
-    height: 100vh;
-    background-color: rgb(55, 104, 156);
-    padding-top:28px;
 }
   

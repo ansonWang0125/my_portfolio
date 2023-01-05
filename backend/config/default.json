@@ -1,0 +1,11 @@
+{
+    "db": {
+      "user": "postgres",
+      "password": "12341234",
+      "host": "localhost",
+      "port": 5432,
+      "database": "my_portfolio",
+      "config": "./config.json",
+      "migration-filename-format": "utc"
+    }
+  }
