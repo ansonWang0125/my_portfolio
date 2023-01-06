@@ -8,7 +8,6 @@ export default function useData() {
             token:''
         }
         if (localStorage.getItem('user') !== 'undefined' && localStorage.getItem('user') !== null ){
-            console.log(localStorage.getItem('user'))
             const dataString = localStorage.getItem('user');
             userData = JSON.parse(dataString);  //字串轉換成物件
         }

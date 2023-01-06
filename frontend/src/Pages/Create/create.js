@@ -1,17 +1,18 @@
-import React, {useEffect} from 'react';
 import Head from './Head';
+import React, {useEffect} from 'react';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 
-const Others = () => {
+const Create = () => {
     const {changeTitle} = UseTitleContext();
+    
     useEffect(() => {
-        changeTitle('Others Articles');
+        changeTitle('Create New Article');
     }, [changeTitle])
     return (
-        <div className="Others">
+        <div className="create">
             <Head />
         </div>
     );
 }
 
-export default Others;
+export default Create;

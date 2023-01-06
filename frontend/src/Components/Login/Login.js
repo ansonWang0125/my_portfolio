@@ -4,72 +4,72 @@ import { useNavigate } from "react-router-dom"
 // import bcrypt from 'bcryptjs';
 import useData from '../App/useData';
 import {UseLoginContext} from '../../Context/LoginCnt'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {apiUserLogin} from '../../axios/api';
 
 
 export default function Login() {
-    const [username, setUserName] = useState();
+    const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
-    const [tokens, setToken] = useState();
     const [success, setSuccess] = useState(false);
     const [notfound, setNotFound] = useState(false);
+    const [passworderror, setPassworderError] = useState(false);
     const [click, setClick] = useState();
     // const [error, setError] = useState(false);
-    const {data} = useData();
+    const {setData} = useData();
     const {changeLogin} = UseLoginContext();
     const navigate = useNavigate();
 
     const gotoSignUpPage = () => navigate("/register");
 
     useEffect ( () => {
-        console.log(notfound)
         if (success) {
             toast.success('登入成功 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
-            })}
+            })
+            console.log('success')
+            navigate('/main')
+        }
         if (notfound) {
             toast.info('尚未註冊 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-info'
             })}
-    }, [notfound, success, click])
+        if (passworderror) {
+            toast.warning('密碼有誤 ! ', {
+                position:toast.POSITION.TOP_CENTER,
+                className: 'toast-warning'
+            })}
+    }, [notfound, success, passworderror, click, navigate,changeLogin])
 
-    async function loginUser(credentials, token) {
-        console.log('loginuser')
-        return fetch('http://localhost:8080/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify(credentials)
-        })
-         .then(function(response) {
+    async function loginUser(credentials) {
+        return apiUserLogin(credentials)
+         .then(response=> {
             if (response.status === 201) {
-                return response.json()
+                return response.data
             }
             if (!response.ok) {throw new Error(response.status)}
          })
-         .catch((error) => {
-            console.log('error: ' + error);
-         })
-    }
-
-    async function loginWithoutToken(credentials) {
-        return fetch('http://localhost:8080/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials)
-        })
          .then(function(response) {
-            if (response.status === 201) {
-                return response.json()
+            console.log(response)
+            if (response.success) {
+                setSuccess(true)
+                setNotFound(false)
+                setPassworderError(false)
+            } else if (!response.success) {
+                if (response.message === 'Password incorrect'){
+                    setSuccess(false)
+                    setNotFound(false)
+                    setPassworderError(true)
+                } else if (response.message === 'User name not found'){
+                    setSuccess(false)
+                    setNotFound(true)
+                    setPassworderError(false)
+                }
             }
-            if (!response.ok) {throw new Error(response.status)}
+            return response
          })
          .catch((error) => {
             console.log('error: ' + error);
@@ -78,37 +78,18 @@ export default function Login() {
 
     const handleLogin = async e => {
         e.preventDefault();
-        var isAvailable
-        console.log(data)
-        if (username === data.userName && password === data.password){
-            setToken(data.token)
-            console.log('token')
-            isAvailable = await loginUser({
-                username,
-            }, data.token);
-        }else {
-            isAvailable = await loginWithoutToken({
-                username,
-                password
-            });
+        const response = await loginUser({
+            userName,
+            password
+        });
+        if (response.success){
+            setData({userName:userName, password:password, token: response.token})
         }
-        console.log('loginnn', isAvailable)
-        if (isAvailable){
-            setSuccess(true)
-            setNotFound(false)
-        } else {
-            console.log('fuckki')
-            setNotFound(true)
-            setSuccess(false)
-        }
-        changeLogin(isAvailable)
+        changeLogin(true)
         setClick(!click)
-
-        // console.log(username, password);
     }
     return(
         <div className="login-wrapper">
-            <ToastContainer />
             <h1>Please Log In</h1>
                 <form onSubmit={handleLogin}>
                 <label>

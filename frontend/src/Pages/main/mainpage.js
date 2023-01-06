@@ -1,10 +1,13 @@
 import Head from './Head';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 
 const Mainpage = () => {
     const {changeTitle} = UseTitleContext();
-    changeTitle('My portfolio');
+    
+    useEffect(() => {
+        changeTitle('My Portfolio');
+    }, [changeTitle])
     return (
         <div className="main">
             <Head />

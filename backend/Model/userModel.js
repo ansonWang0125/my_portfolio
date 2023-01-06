@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.STRING,
             allowNull: false
         },
-        token:{
+        password:{
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
     }, {timestamps: false})
     User.sync()
     return User

@@ -3,7 +3,7 @@ import './css/Head.css';
 import {UseTitleContext} from '../../Context/TitleContextProvider'
 
 const ShareHead = () => {
-  const {title} = UseTitleContext;
+  const {title} = UseTitleContext();
 
   return (
     <div className="share-head">

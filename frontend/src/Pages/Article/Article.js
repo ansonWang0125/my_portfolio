@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Head from './Head';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 
 const Article = () => {
     const {changeTitle} = UseTitleContext();
-    changeTitle('Website Article');
+    useEffect(() => {
+        changeTitle('Website Article');
+    }, [changeTitle])
     return (
         <div className="article">
             <Head />
