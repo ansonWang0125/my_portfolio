@@ -1,0 +1,16 @@
+.DraftEditor-root {
+  position: relative;
+}
+.public-DraftEditorPlaceholder-root{
+  position: relative;
+}
+.public-DraftEditorPlaceholder-inner{
+  color: #aaaaaa;
+  position: absolute;
+}
+.DraftEditor-editorContainer {
+  background-color: rgba(255,255,255,0);
+  border-left: .1px solid transparent;
+  position: relative;
+  z-index: 1;
+}

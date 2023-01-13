@@ -9,7 +9,7 @@ export const navData = [
         id: 0,
         icon: <HomeIcon/>,
         text: "Main",
-        link: "main",
+        link: "",
         needLogin: false
     },
     {

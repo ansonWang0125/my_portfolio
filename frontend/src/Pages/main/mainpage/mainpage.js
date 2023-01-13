@@ -1,6 +1,8 @@
 import Head from './Head';
+import Body from './Body';
 import React, {useEffect} from 'react';
-import { UseTitleContext } from '../../Context/TitleContextProvider';
+import { UseTitleContext } from '../../../Context/TitleContextProvider';
+import './css/mainpage.css'
 
 const Mainpage = () => {
     const {changeTitle} = UseTitleContext();
@@ -11,6 +13,7 @@ const Mainpage = () => {
     return (
         <div className="main">
             <Head />
+            <Body />
         </div>
     );
 }

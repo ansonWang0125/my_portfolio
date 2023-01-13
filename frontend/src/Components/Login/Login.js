@@ -30,7 +30,7 @@ export default function Login() {
                 className: 'toast-success'
             })
             console.log('success')
-            navigate('/main')
+            navigate('/')
         }
         if (notfound) {
             toast.info('尚未註冊 ! ', {

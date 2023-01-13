@@ -1,6 +1,6 @@
 import Icon from '../Menu/icon/icon';
 import Item from '../Menu/item/item';
-import Mainpage from '../../Pages/main/mainpage';
+import Mainblog from '../../Pages/main/mainblog';
 import Article from '../../Pages/Article/Article'
 import Work from '../../Pages/Work/Work';
 import Others from '../../Pages/Others/Others';
@@ -12,21 +12,22 @@ import {
   } from "react-router";
 
 const Main = () => {
+
     return (
         <main>
             <Icon />
             <Item />
             <Routes>
-              <Route path='main' element={<Mainpage />}/>
+              <Route path='/*' element={<Mainblog />}/>
               <Route path='Website_Articles' element={<Article />}/>
               <Route path='work' element={<Work />}/>
               <Route path='Other_Articles' element={<Others />}/>
               <Route 
-            path="Create" 
-            element={
-              <ProtectedRoutes>
-                <Create/>
-              </ProtectedRoutes>}/>
+                path="Create" 
+                element={
+                  <ProtectedRoutes>
+                    <Create/>
+                  </ProtectedRoutes>}/>
             </Routes>
           </main>
     );

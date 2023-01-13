@@ -14,7 +14,6 @@ const Icon = () => {
     const {login, changeLogin} = UseLoginContext();
     const [loginData, logoutData] = logData
     const [click, setClick] = useState(false)
-    console.log(loginData, logoutData)
     const toggleMenu = () => {
         let menus = document.getElementById('navbarToggleExternalContent')
         if (menu){

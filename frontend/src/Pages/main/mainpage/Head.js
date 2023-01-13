@@ -1,4 +1,4 @@
-import ShareHead from '../../Components/Head/Share_Head';
+import ShareHead from '../../../Components/Head/Share_Head';
 import React from 'react';
 
 const  Head = () =>{

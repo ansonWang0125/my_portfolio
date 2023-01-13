@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import Head from './Head';
+import Body from './Body';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 
 const Work = () => {
@@ -10,6 +11,7 @@ const Work = () => {
     return (
         <div className="Work">
             <Head />
+            <Body />
         </div>
     );
 }

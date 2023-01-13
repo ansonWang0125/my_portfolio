@@ -1,0 +1,22 @@
+.body {
+    /* display:inline-block; */
+    text-align:center;
+}
+
+.illustration {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.BlogLink {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.item{
+    padding: 10px 20px;
+    cursor: pointer;
+    color:#1c80e4;
+    text-decoration:none;
+}

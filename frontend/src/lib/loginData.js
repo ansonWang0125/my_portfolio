@@ -13,6 +13,6 @@ export const logData = [
         id: 1,
         icon: <LogoutIcon/>,
         text: "Logout",
-        link: "/main"
+        link: "/"
     }
 ]
