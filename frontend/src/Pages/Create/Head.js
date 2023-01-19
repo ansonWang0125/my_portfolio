@@ -1,10 +1,13 @@
-import ShareHead from '../../Components/Head/Share_Head';
 import React from 'react';
+import {UseTitleContext} from '../../Context/TitleContextProvider'
 
 const  Head = () =>{
+    const {title} = UseTitleContext();
     return (
         <div className='Head'>
-            <ShareHead />
+            <div className ='start'>
+            <span> {title}</span>
+          </div>
         </div>
     );
     } 

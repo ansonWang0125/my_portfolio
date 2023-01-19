@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const db = require('./Model')
 const userRoutes = require('./Routes/userRoutes')
+const articleRoutes = require('./Routes/articleRoutes')
 
 const PORT = process.env.PORT ||8080
 
@@ -18,6 +19,7 @@ db.sequelize.sync().then(() => {    //drop table if exists
 })
 
 app.use('/api/users', userRoutes)
+app.use('/api/article', articleRoutes)
 
 // app.use('/login', (req,res) => {
 //     res.send({

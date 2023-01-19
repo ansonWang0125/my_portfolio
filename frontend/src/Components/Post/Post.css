@@ -1,0 +1,61 @@
+.container{
+    width:60%;
+    display: flex; 
+    align-items: baseline;
+}
+.post {
+    width: 100%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:2%;
+    /* left:50%;
+    top:50%; */
+}
+.editInform{
+    width: 100%;
+}
+.editInform .author{
+    float:left;
+    width:40%
+}
+.editInform .time{
+    float:right;
+    text-align:right;
+    width:40%;
+}
+.content{
+    width: 100%;
+    padding:0.5%;
+
+}
+.title .DraftEditor-root {
+    font-size: 30px;
+}
+.author .DraftEditor-root {
+    font-size: 14px;
+}
+.time .datestring {
+    padding:3%;
+    font-size: 14px;
+}
+.content .DraftEditor-root {
+    font-size: 20px;
+}
+.content .makeStyles-draftEditorContainer-1{
+    text-align:left;
+    width:100%;
+    padding:1%;
+}
+.author .makeStyles-draftEditorContainer-1{
+
+    width:100%;
+    padding:3%;
+}
+

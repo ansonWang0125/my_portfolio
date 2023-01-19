@@ -13,7 +13,7 @@ const Item = () => {
                 {navData.map(item =>{
                     return  (login || !item.needLogin)?(<NavLink key={item.id} className={styles.sideitem} to={item.link}>
                                 <span className={styles.linkText}>{item.text}</span>
-                            </NavLink>):(<></>)
+                            </NavLink>):(<div key={item.id}></div >)
                 })}
 
             </div>

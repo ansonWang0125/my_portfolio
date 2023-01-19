@@ -1,7 +1,3 @@
-import "draft-js-inline-toolbar-plugin/lib/plugin.css";
-import { ItalicButton, BoldButton, UnderlineButton, } from "draft-js-buttons";
-import createInlineToolbarPlugin from "draft-js-inline-toolbar-plugin";
-import createLinkPlugin from "draft-js-anchor-plugin";
 import Editor, { composeDecorators } from "draft-js-plugins-editor";
 // import RightClick from './RightClick'
 import { ContextMenu } from "./css/styles";
@@ -9,37 +5,15 @@ import React, { useState, useEffect, useRef } from "react";
 import createImagePlugin from  'draft-js-image-plugin';
 import createResizeablePlugin from 'draft-js-resizeable-plugin';
 import useStyleMap from '../styleMap/useStyleMap';
-import editorStyles from './editorStyles.module.css';
 import { makeStyles }from '@material-ui/core/styles';
 import AddImage from './AddImage'
 import { stateToHTML } from "draft-js-export-html";
+import { inlineToolbarPlugin } from './ToolBar.js';
+import {linkPlugin} from './ToolBar.js';
 
-import FontStyle from "./FontStyle";
-
-let themeStyles = {
-    input: "input-here",
-    inputInvalid: "PUT YOUR INPUT INVALID CLASS HERE"
-  };
-  const linkPlugin = createLinkPlugin({
-    theme: themeStyles,
-    placeholder: "http://…"
-  });
-  const inlineToolbarPlugin = createInlineToolbarPlugin();
-  const { InlineToolbar } = inlineToolbarPlugin;
   const resizeablePlugin = createResizeablePlugin()
   const decorator= composeDecorators(resizeablePlugin)
   const imagePlugin = createImagePlugin(decorator);
-  const plugins = [resizeablePlugin,inlineToolbarPlugin, linkPlugin, imagePlugin]
-
-  const FontStyleHandler = (props) => {
-    const handleMouseDown = (e) =>e.preventDefault();
-    const onClick = () => {props.onOverrideContent(FontStyle); console.log('comeback')}
-    return (
-      <div onMouseDown={handleMouseDown} className={editorStyles.headlineButtonWrapper}>
-        <button onClick={onClick} className={editorStyles.headlineButton}>FontStyle</button>
-      </div>
-    )
-  }
 
   const useStyles = makeStyles((theme)=>({
     draftEditorContainer: {
@@ -50,7 +24,9 @@ let themeStyles = {
     },
     },}))
   
-  export default function ToolBarEditor ({editorState, setEditorState, placeholder}) {
+  export default function MyEditor ({editorState, setEditorState, placeholder, allowAdd}) {
+
+    const plugins = [resizeablePlugin, imagePlugin, inlineToolbarPlugin, linkPlugin]
 
     const classes = useStyles()
 
@@ -135,20 +111,8 @@ let themeStyles = {
               customStyleMap={customStyleMap}
               ref={editorRef}
             />
-            <InlineToolbar>
-          {// may be use React.Fragment instead of div to improve perfomance after React 16
-          externalProps => (
-              <div>
-              <FontStyleHandler {...externalProps} />
-              <BoldButton {...externalProps} />
-              <ItalicButton {...externalProps} />
-              <UnderlineButton {...externalProps} />
-              <linkPlugin.LinkButton {...externalProps} />
-              </div>
-          )}
-          </InlineToolbar>
         </div>
-        {clicked && (
+        {clicked && allowAdd && (
           <ContextMenu top={points.y} left={points.x} ref={rightRef}>
             {/* <ul>
               <li>Edit</li>

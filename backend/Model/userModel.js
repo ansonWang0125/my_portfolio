@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        authorName: {
+            type: DataTypes.STRING,
+            allowNull:true
+        }
     }, {timestamps: false})
-    User.sync()
     return User
 }

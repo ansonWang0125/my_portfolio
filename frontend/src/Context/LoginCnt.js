@@ -8,7 +8,7 @@ const LoginContext = React.createContext({
 
 
 const LoginContextProvider = (props) => {
-    const hasToken = localStorage.getItem('user')
+    const hasToken = localStorage.getItem('user')?true:(localStorage.getItem('profile')?true:false)
     const [login, setLogin] = useState(hasToken)
     // const [login, setLogin] = useState(false)
     // const [signup, setSignup] = useState(false);

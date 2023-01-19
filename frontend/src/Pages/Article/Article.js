@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import Head from './Head';
-import Body from './Body';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
+import { Route, Routes } from "react-router-dom";
+import Post from '../../Components/Post/Post'
+import SearchPage from "./SearchPage/SearchPage"
 import './article.css'
 
 const Article = () => {
@@ -11,8 +12,10 @@ const Article = () => {
     }, [changeTitle])
     return (
         <div className="article">
-            <Head />
-            <Body />
+            <Routes>
+                <Route path="/" element={<SearchPage/>} />
+                <Route path="/:id" element={<Post /> } />
+            </Routes>
         </div>
     );
 }

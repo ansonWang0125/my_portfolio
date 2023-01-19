@@ -1,0 +1,26 @@
+.create{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Head{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    height: 80px;
+    white-space: nowrap;
+    align-items: center;
+}
+.Head .start{ 
+    width: 30% ;
+    text-align:center;
+    font-size: 1cm;
+    font-family: Monospace;
+}
+.Body {
+    width: 890px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}

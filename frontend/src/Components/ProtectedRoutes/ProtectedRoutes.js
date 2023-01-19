@@ -5,7 +5,6 @@ import {UseLoginContext} from '../../Context/LoginCnt'
 
 export default function ProtectedRoutes ({ children }) {
     const {login} = UseLoginContext();
-    console.log('login',login)
     const authed = login
     
     return authed ? children : <Navigate to="/login" />;

@@ -3,6 +3,7 @@ import Mainpage from "./mainpage/mainpage";
 import Blog from "./Blog/Blog";
 import BlogPost from "./BlogPost/BlogPost";
 import { React, useState } from "react";
+import './main.css'
 
 function Mainblog() {
 const [getBlogContent, setGetBlogContent] = useState([]);
@@ -11,7 +12,7 @@ const [getBlogContent, setGetBlogContent] = useState([]);
   }
   return (
     <div>
-      <div className="container">
+      <div className="main">
         <Routes>
           <Route path="/" element={<Mainpage/>} />
           <Route path="/blog" element={<Blog data={getData}/>} />

@@ -4,7 +4,8 @@
     display: block;
     height: 100%;
     min-height: 100%;
-    position:absolute;
+    position:fixed;
+    z-index:999;
   }
   
 #navbarToggleExternalContent.menu-show{

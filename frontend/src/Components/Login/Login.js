@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './css/login.css';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom"
 // import bcrypt from 'bcryptjs';
 import useData from '../App/useData';
+// import useProfile from '../App/useProfile';
 import {UseLoginContext} from '../../Context/LoginCnt'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {apiUserLogin} from '../../axios/api';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import usePost from '../../hooks/usePost';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 
 export default function Login() {
@@ -18,10 +28,40 @@ export default function Login() {
     const [click, setClick] = useState();
     // const [error, setError] = useState(false);
     const {setData} = useData();
+    // const {setProfile} = useProfile();
     const {changeLogin} = UseLoginContext();
     const navigate = useNavigate();
+    const formRef = useRef()
+    const { handleGoogle, loading, error } = usePost('login');
 
-    const gotoSignUpPage = () => navigate("/register");
+    // useEffect(() => {
+    //     /* global google */
+    //     if (window.google) {
+    //       google.accounts.id.initialize({
+    //         client_id: process.env.REACT_APP_CLIENT_ID,
+    //         callback: handleGoogle,
+    //       });
+    
+    //       google.accounts.id.renderButton(document.getElementById("loginDiv"), {
+    //         type: "icon",
+    //         theme: "filled_blue",
+    //         size: "small",
+    //         text: "signin_with",
+    //         shape: "pill",
+    //       });
+    
+    //       // google.accounts.id.prompt()
+    //     }
+    //   }, [handleGoogle]);
+    useEffect(() => {
+        const initClient = () => {
+              gapi.client.init({
+              clientId: process.env.REACT_APP_CLIENT_ID,
+              callback: handleGoogle,
+            });
+         };
+         gapi.load('client:auth2', initClient);
+     });
 
     useEffect ( () => {
         if (success) {
@@ -88,28 +128,118 @@ export default function Login() {
         changeLogin(true)
         setClick(!click)
     }
+    const handleBtnClick = () => {
+        formRef.current.reportValidity();
+    }
+    const onSuccess = async (res) => {
+        console.log('success:', res);
+        await handleGoogle()
+        // const result = res?.profileObj
+        // const token = res?.tokenId;
+        // setProfile({result: result, token: token})
+        // navigate("/")
+    };
+    const onFailure = (err) => {
+        console.log('failed:', err);
+    };
     return(
-        <div className="login-wrapper">
-            <h1>Please Log In</h1>
-                <form onSubmit={handleLogin}>
-                <label>
-                    <p>Username</p>
-                    <input type="text" onChange={e=> setUserName(e.target.value)}/>
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)}/>
-                </label>
-                <div>
-                    <button type="submit" >Submit</button>
+        <Box 
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              m: 1,
+              width: 600,
+              height: 800,
+            },
+            '& .MuiTextField-root': { m: 1, width: '25ch' }
+             }}
+             ref={formRef}
+            component="form"
+            noValidate
+            autoComplete="off"
+            className='box'
+            onSubmit={handleLogin}
+        >
+            <Paper elevation={3} id='login'>
+                <div className='title'>
+                    <h1>Login</h1>
                 </div>
-                <p>
-                    Don't have an account?{" "}
-                    <span className='link' onClick={gotoSignUpPage}>
-                        Sign up
-                    </span>
-                </p>
-                </form>
-        </div>
+                <div className='login-input'>
+                <TextField
+                    required
+                    id="outlined-required"
+                    label='User Name'
+                    style={{width: 350,height:30}}
+                    onChange={e=> setUserName(e.target.value)}
+                />
+                </div>
+                <div className='login-input'>
+                <TextField
+                    required
+                    id="outlined-required"
+                    label='Password'
+                    style={{width: 350,height:30}}
+                    onChange={e => setPassword(e.target.value)}
+                />
+                </div>
+                <div className='login-submit'>
+                    <Button variant="contained" 
+                            style={{width: 350,height:30}}
+                            type="submit"
+                            onClick={handleBtnClick}
+                    >
+                        Login
+                    </Button>
+                </div>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                    {loading ? <div>Loading....</div> : 
+                <GoogleLogin
+                    clientId={process.env.REACT_APP_CLIENT_ID}
+                    // buttonText='Sign in with google'
+                    render={(renderProps) => (
+                        <Button
+                            color="primary"
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            startIcon={<GoogleIcon />}
+                            variant='contained'
+                            style={{width: 350,height:30}}
+                        >
+                            Login with Google
+                        </Button>
+                    )}
+                    onSuccess={onSuccess}
+                    onFailure={onFailure}
+                /> }
+                {/* <main
+                    style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    }}
+                >
+                    {error && <p style={{ color: "red" }}>{error}</p>}
+                    {loading ? <div>Loading....</div> : 
+                    <Button
+                        color="primary"
+                        startIcon={<div id="loginDiv"></div> }
+                        variant='contained'
+                        style={{width: 350,height:30}}
+                    >
+                        Login with Google
+                    </Button>}
+                </main> */}
+                <div>
+                    <p>
+                        Don't have an account? Click {" "}
+                        <NavLink to={'/register'} 
+                                className='listitem'>
+                        Here</NavLink>
+                     </p>
+                </div>
+            </Paper>
+        </Box>
       )
 }

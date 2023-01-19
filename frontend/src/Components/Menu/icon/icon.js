@@ -7,6 +7,7 @@ import {logData} from "../../../lib/loginData";
 import styles from'./css/menu.module.css';
 import {UseLoginContext} from '../../../Context/LoginCnt';
 import { toast } from 'react-toastify';
+import AccountMenu from '../../AccountMenu/AccountMenu';
 
 const Icon = () => {
 
@@ -50,21 +51,26 @@ const Icon = () => {
                 <MuiMenu  sx={{ color: "white", backgroundColor: "#0E0C5D " }} className='muiMenu'/>
                 <span className="navbar-toggler-icon"></span>
             </button>
-            { !login?
-                (<div className='navbar-login'>
-                    <NavLink key={loginData.id} className={styles.login} to={loginData.link}>
-                        {loginData.icon}
-                        <span className={styles.linkText}>{loginData.text}</span>
-                    </NavLink>
+            <div className="user-control">
+                { !login?
+                    (<div className='navbar-login'>
+                        <NavLink key={loginData.id} className={styles.login} to={loginData.link}>
+                            {loginData.icon}
+                            <span className={styles.linkText}>{loginData.text}</span>
+                        </NavLink>
+                    </div>)
+                    :
+                    (<div className='navbar-logout'>
+                        <NavLink key={logoutData.id} className={styles.login} to={logoutData.link} onClick={handleLogout}>
+                            {logoutData.icon}
+                            <span className={styles.linkText}>{logoutData.text}</span>
+                        </NavLink>
                 </div>)
-                :
-                (<div className='navbar-logout'>
-                    <NavLink key={logoutData.id} className={styles.login} to={logoutData.link} onClick={handleLogout}>
-                        {logoutData.icon}
-                        <span className={styles.linkText}>{logoutData.text}</span>
-                    </NavLink>
-            </div>)
-            }
+                }
+                <div className='accountMenu'>
+                    <AccountMenu />
+                </div>
+            </div>
         </nav>
     );
 }

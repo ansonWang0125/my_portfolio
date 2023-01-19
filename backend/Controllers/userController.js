@@ -20,7 +20,7 @@ const signup = async (req, res) => {
         const user = await User.create(data);
         if (user) {
             console.log("user", JSON.stringify(user,2));
-            userData = {userName: userName, password: hashedPassword, token:''}
+            let userData = {userName: userName, password: hashedPassword, token:''}
             console.log('userData',userData);
             return res.status(201).send({success:true,userData});
         }else {

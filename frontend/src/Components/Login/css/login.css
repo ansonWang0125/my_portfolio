@@ -1,7 +1,16 @@
-.login-wrapper {
-    display: relative;
-    left:50%;
-    align-items: center;
-    margin:0px auto;
+.box {
+    background:#bde2f8;
+}
+#login {
+    display:flex;
     flex-direction: column;
+    align-items: center;
+    padding:2%,
+}
+.login-input {
+    margin:5%
+}
+
+.login-submit {
+    margin:8%
 }

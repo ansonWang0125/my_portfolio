@@ -3,6 +3,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import WorkIcon from '@mui/icons-material/Work';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CreateIcon from '@mui/icons-material/Create';
+import FolderIcon from '@mui/icons-material/Folder';
 
 export const navData = [
     {
@@ -38,6 +39,13 @@ export const navData = [
         icon: <CreateIcon/>,
         text: "Create New Article",
         link: "Create",
+        needLogin:true
+    },
+    {
+        id: 5,
+        icon: <FolderIcon/>,
+        text: "My Articles",
+        link: "My_Articles",
         needLogin:true
     }
 ]
