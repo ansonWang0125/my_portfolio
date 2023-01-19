@@ -17,8 +17,6 @@ const articleRequest = axios.create({
 
 export const apiUserLogin = data => userRequest.post('/login', data);
 export const apiUserSignUp = data => userRequest.post('/signup', data);
-export const apiUserLoginWithGoogle = data => userRequest.post('/googleLogin', data);
-export const apiUserSignUpWithGoogle = data => userRequest.post('/googleSignUp', data);
 
 export const apiArticleSave = data => articleRequest.post('/save',data);
 export const apiArticleCreate = data => articleRequest.post('/create',data);

@@ -48,44 +48,7 @@ const checkToken = async (req, res, next) => {
     }
 };
 
-
-const googleAuth = async (req, res, next) => {
-    const GOOGLE_CLIENT_ID = process.env.CLIENT_ID;
-    const client = new OAuth2Client(GOOGLE_CLIENT_ID);
-
-    async function verifyGoogleToken(token) {
-        try {
-          const ticket = await client.verifyIdToken({
-            idToken: token,
-            audience: GOOGLE_CLIENT_ID,
-          });
-          return { payload: ticket.getPayload() };
-        } catch (error) {
-          return { error: "Invalid user detected. Please try again" };
-        }
-    }
-    try {
-        if (req.body.credential) {
-            const verificationResponse = await verifyGoogleToken(req.body.credential);
-    
-            if (verificationResponse.error) {
-            return res.status(200).json({
-                success:false,message: verificationResponse.error,
-            });
-            }
-            const profile = verificationResponse?.payload;
-            req.profile = profile
-            console.log(profile);
-        }
-    } catch (error) {
-        res.status(200).json({
-          success:false,message: "An error occurred. Registration failed.",
-        });
-    }
-}
-
 module.exports = {
     saveUser,
     checkToken,
-    googleAuth
 };

@@ -3,7 +3,6 @@ import './css/login.css';
 import { useNavigate, NavLink } from "react-router-dom"
 // import bcrypt from 'bcryptjs';
 import useData from '../App/useData';
-// import useProfile from '../App/useProfile';
 import {UseLoginContext} from '../../Context/LoginCnt'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,10 +11,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import usePost from '../../hooks/usePost';
-import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script';
-import GoogleIcon from '@mui/icons-material/Google';
 
 
 
@@ -32,36 +27,7 @@ export default function Login() {
     const {changeLogin} = UseLoginContext();
     const navigate = useNavigate();
     const formRef = useRef()
-    const { handleGoogle, loading, error } = usePost('login');
 
-    // useEffect(() => {
-    //     /* global google */
-    //     if (window.google) {
-    //       google.accounts.id.initialize({
-    //         client_id: process.env.REACT_APP_CLIENT_ID,
-    //         callback: handleGoogle,
-    //       });
-    
-    //       google.accounts.id.renderButton(document.getElementById("loginDiv"), {
-    //         type: "icon",
-    //         theme: "filled_blue",
-    //         size: "small",
-    //         text: "signin_with",
-    //         shape: "pill",
-    //       });
-    
-    //       // google.accounts.id.prompt()
-    //     }
-    //   }, [handleGoogle]);
-    useEffect(() => {
-        const initClient = () => {
-              gapi.client.init({
-              clientId: process.env.REACT_APP_CLIENT_ID,
-              callback: handleGoogle,
-            });
-         };
-         gapi.load('client:auth2', initClient);
-     });
 
     useEffect ( () => {
         if (success) {
@@ -131,17 +97,6 @@ export default function Login() {
     const handleBtnClick = () => {
         formRef.current.reportValidity();
     }
-    const onSuccess = async (res) => {
-        console.log('success:', res);
-        await handleGoogle()
-        // const result = res?.profileObj
-        // const token = res?.tokenId;
-        // setProfile({result: result, token: token})
-        // navigate("/")
-    };
-    const onFailure = (err) => {
-        console.log('failed:', err);
-    };
     return(
         <Box 
             sx={{
@@ -192,45 +147,6 @@ export default function Login() {
                         Login
                     </Button>
                 </div>
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                    {loading ? <div>Loading....</div> : 
-                <GoogleLogin
-                    clientId={process.env.REACT_APP_CLIENT_ID}
-                    // buttonText='Sign in with google'
-                    render={(renderProps) => (
-                        <Button
-                            color="primary"
-                            onClick={renderProps.onClick}
-                            disabled={renderProps.disabled}
-                            startIcon={<GoogleIcon />}
-                            variant='contained'
-                            style={{width: 350,height:30}}
-                        >
-                            Login with Google
-                        </Button>
-                    )}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                /> }
-                {/* <main
-                    style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    }}
-                >
-                    {error && <p style={{ color: "red" }}>{error}</p>}
-                    {loading ? <div>Loading....</div> : 
-                    <Button
-                        color="primary"
-                        startIcon={<div id="loginDiv"></div> }
-                        variant='contained'
-                        style={{width: 350,height:30}}
-                    >
-                        Login with Google
-                    </Button>}
-                </main> */}
                 <div>
                     <p>
                         Don't have an account? Click {" "}

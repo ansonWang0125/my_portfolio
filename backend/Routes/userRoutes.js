@@ -11,10 +11,5 @@ router.post('/signup', userAuth.saveUser, signup)
 
 router.post('/login', login)
 
-router.post('/googleLogin', userAuth.googleAuth)
-
-router.post('/googleSignup', userAuth.googleAuth)
-
-
 
 module.exports = router
