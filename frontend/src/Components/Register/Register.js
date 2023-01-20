@@ -9,17 +9,26 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
+import { getGoogleUrl } from '../../utils/getGoogleUrl';
+
+const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT_SIGNUP
 
 export default function Register() {
-    const [userName, setUserName] = useState();
-    const [password, setPassword] = useState();
-    const [success, setSuccess] = useState();
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [success, setSuccess] = useState(false);
     const [hassignup, setHasSignUp] = useState(false);
     const [incorrect, setIncorrect] = useState(false);
-    const [click, setClick] = useState();
+    const [emailValid, setEmailValid] = useState(true);
+    const [valid, setValid] = useState(false);
+    const [click, setClick] = useState(false);
     const {setData} = useData();
     const navigate = useNavigate();
     const formRef = useRef()
+    let from = '/login';
     
     
 
@@ -30,7 +39,7 @@ export default function Register() {
                 className: 'toast-success'
             })}
         if (hassignup) {
-            toast.info('使用者名稱已用過 ! ', {
+            toast.info('此信箱已用過 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-info'
             })}
@@ -39,7 +48,18 @@ export default function Register() {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-error'
             })}
-    }, [success, hassignup, incorrect, click])
+        if (!emailValid) {
+            toast.info('Email有誤 ! ', {
+                position:toast.POSITION.TOP_CENTER,
+                className: 'toast-info'
+            })}
+    }, [success, hassignup, incorrect,emailValid, click])
+
+    useEffect ( () =>{
+        if (success) {
+            navigate("/login")
+        }
+    }, [success, navigate])
 
     async function signupUser(credentials) {
         return apiUserSignUp(credentials)
@@ -54,13 +74,12 @@ export default function Register() {
                 setHasSignUp(false)
                 setIncorrect(false)
                 setSuccess(true)
-                navigate("/login")
             } else if (!response.success){
                 if ( response.message === "Details are not correct") {
                     setSuccess(false)
                     setHasSignUp(false)
                     setIncorrect(true)
-                } else if (response.message === 'username already exists') {
+                } else if (response.message === 'user already exists') {
                     setSuccess(false)
                     setIncorrect(false)
                     setHasSignUp(true)
@@ -76,16 +95,27 @@ export default function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const response = await signupUser({
-            userName,
-            password
-        });
-        if (response.success) {
-            setData(response.userData);
+        if (valid){
+            console.log('valid')
+            const response = await signupUser({
+                userName,
+                email,
+                password
+            });
+            if (response.success) {
+                setData(response.userData);
+            }
         }
         setClick(!click)
     }
     const handleBtnClick = () => {
+        let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if ( re.test(email) ) {
+            setEmailValid(true)
+            if ( userName && email && password){
+                setValid(true)
+            }
+        } else { setEmailValid(false) }
         formRef.current.reportValidity();
     }
     return(
@@ -114,7 +144,7 @@ export default function Register() {
                 <div className='signup-input'>
                 <TextField
                     required
-                    id="outlined-required"
+                    id="username"
                     label='User Name'
                     style={{width: 350,height:30}}
                     onChange={e=> setUserName(e.target.value)}
@@ -123,9 +153,19 @@ export default function Register() {
                 <div className='signup-input'>
                 <TextField
                     required
-                    id="outlined-required"
+                    id="email"
+                    label='Email'
+                    style={{width: 350,height:30}}
+                    onChange={e=> setEmail(e.target.value)}
+                />
+                </div>
+                <div className='signup-input'>
+                <TextField
+                    required
+                    id="password"
                     label='Password'
                     style={{width: 350,height:30}}
+                    type="password"
                     onChange={e => setPassword(e.target.value)}
                 />
                 </div>
@@ -137,6 +177,32 @@ export default function Register() {
                     >
                         Sing up
                     </Button>
+                </div>
+                <div className='google-login'>
+                    <Link 
+                        href={getGoogleUrl(from, redirect_uri)}
+                        sx={{
+                        backgroundColor: '#f5f6f7',
+                        borderRadius: 1,
+                        py: '0.6rem',
+                        columnGap: '1rem',
+                        textDecoration: 'none',
+                        color: '#393e45',
+                        cursor: 'pointer',
+                        fontWeight: 500,
+                        '&:hover': {
+                            backgroundColor: '#fff',
+                            boxShadow: '0 1px 13px 0 rgb(0 0 0 / 15%)',
+                        },
+                        }}
+                        display='flex'
+                        justifyContent='center'
+                        alignItems='center'
+                        style={{width: 350,height:30}}
+                    >
+                        <GoogleLogo style={{margin:'3%'}}/>    
+                        Sign up with Google
+                    </Link>
                 </div>
                 <div>
                     <p>

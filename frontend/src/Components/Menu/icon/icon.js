@@ -8,6 +8,7 @@ import styles from'./css/menu.module.css';
 import {UseLoginContext} from '../../../Context/LoginCnt';
 import { toast } from 'react-toastify';
 import AccountMenu from '../../AccountMenu/AccountMenu';
+import { removeToken } from '../../../Cookies/cookies';
 
 const Icon = () => {
 
@@ -36,6 +37,7 @@ const Icon = () => {
 
     const logout = () =>{
         localStorage.removeItem('user');
+        removeToken()
         changeLogin(false)
     }
 

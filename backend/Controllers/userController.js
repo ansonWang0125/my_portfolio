@@ -4,23 +4,26 @@ require('dotenv').config()
 
 const jwt = require("jsonwebtoken");
 
+const Op = db.Sequelize.Op
+
 const User = db.users;
 
 const signup = async (req, res) => {
     try {
         console.log('signup')
-        const { userName, password } = req.body;
+        const { userName, email, password } = req.body;
         console.log(userName, password);
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword)
         const data = {
             userName,
+            email,
             password: hashedPassword,
         };
         const user = await User.create(data);
-        if (user) {
+        if (user !== null) {
             console.log("user", JSON.stringify(user,2));
-            let userData = {userName: userName, password: hashedPassword, token:''}
+            let userData = {userName: userName, email: email, password: hashedPassword, token:''}
             console.log('userData',userData);
             return res.status(201).send({success:true,userData});
         }else {
@@ -36,17 +39,20 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const {userName, password} = req.body;
-        const user = await User.findOne({where: {userName: userName}});
+        const {userData, password} = req.body;
+        const user = await User.findOne({
+            where: {
+                [Op.or]: [{userName: userData}, {email: userData}]
+            }});
 
-        console.log(userName, password);
+        console.log(userData, password);
 
 
-        if (user) {
+        if (user !== null ) {
             const isSame = await bcrypt.compare(password, user.password);
             if (isSame) {
                 console.log("user", JSON.stringify(user,2));
-                let token = jwt.sign({ id:user.id, iat: 1645869827, userName:userName}, process.env.secretKey, {   //用jwt來為使用者生成token, secretKey是用來為jtw加密
+                let token = jwt.sign({ id:user.id, iat: 1645869827, userEmail:user.email}, process.env.secretKey, {   //用jwt來為使用者生成token, secretKey是用來為jtw加密
                     expiresIn: 1 *24 * 60 * 60 * 1000       //expiresIn 是設定有效期限
                     })
                 return res.status(201).send({success:true, token: token});

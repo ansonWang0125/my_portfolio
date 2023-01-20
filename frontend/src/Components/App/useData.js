@@ -4,6 +4,7 @@ export default function useData() {
     const getData = () =>  {
         var userData = {
             userName:'',
+            email:'',
             password:'',
             token:''
         }

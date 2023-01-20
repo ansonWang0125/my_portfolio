@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './css/login.css';
-import { useNavigate, NavLink } from "react-router-dom"
+import { useNavigate, NavLink, useLocation } from "react-router-dom"
 // import bcrypt from 'bcryptjs';
 import useData from '../App/useData';
 import {UseLoginContext} from '../../Context/LoginCnt'
@@ -11,11 +11,16 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
+import { getGoogleUrl } from '../../utils/getGoogleUrl';
 
+
+const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT
 
 
 export default function Login() {
-    const [userName, setUserName] = useState();
+    const [userData, setUserData] = useState();
     const [password, setPassword] = useState();
     const [success, setSuccess] = useState(false);
     const [notfound, setNotFound] = useState(false);
@@ -23,10 +28,12 @@ export default function Login() {
     const [click, setClick] = useState();
     // const [error, setError] = useState(false);
     const {setData} = useData();
-    // const {setProfile} = useProfile();
     const {changeLogin} = UseLoginContext();
     const navigate = useNavigate();
     const formRef = useRef()
+
+    const location = useLocation();
+    let from = ((location.state)?.from?.pathname) || '/';
 
 
     useEffect ( () => {
@@ -85,11 +92,11 @@ export default function Login() {
     const handleLogin = async e => {
         e.preventDefault();
         const response = await loginUser({
-            userName,
+            userData: userData,
             password
         });
         if (response.success){
-            setData({userName:userName, password:password, token: response.token})
+            setData({token: response.token})
         }
         changeLogin(true)
         setClick(!click)
@@ -123,17 +130,18 @@ export default function Login() {
                 <div className='login-input'>
                 <TextField
                     required
-                    id="outlined-required"
-                    label='User Name'
+                    id="data"
+                    label='User Name or Email'
                     style={{width: 350,height:30}}
-                    onChange={e=> setUserName(e.target.value)}
+                    onChange={e=> setUserData(e.target.value)}
                 />
                 </div>
                 <div className='login-input'>
                 <TextField
                     required
-                    id="outlined-required"
+                    id="password"
                     label='Password'
+                    type="password"
                     style={{width: 350,height:30}}
                     onChange={e => setPassword(e.target.value)}
                 />
@@ -146,6 +154,32 @@ export default function Login() {
                     >
                         Login
                     </Button>
+                </div>
+                <div className='google-login'>
+                    <Link 
+                        href={getGoogleUrl(from, redirect_uri)}
+                        sx={{
+                        backgroundColor: '#f5f6f7',
+                        borderRadius: 1,
+                        py: '0.6rem',
+                        columnGap: '1rem',
+                        textDecoration: 'none',
+                        color: '#393e45',
+                        cursor: 'pointer',
+                        fontWeight: 500,
+                        '&:hover': {
+                            backgroundColor: '#fff',
+                            boxShadow: '0 1px 13px 0 rgb(0 0 0 / 15%)',
+                        },
+                        }}
+                        display='flex'
+                        justifyContent='center'
+                        alignItems='center'
+                        style={{width: 350,height:30}}
+                    >
+                        <GoogleLogo style={{margin:'3%'}}/>    
+                        Login with Google
+                    </Link>
                 </div>
                 <div>
                     <p>
