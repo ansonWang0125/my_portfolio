@@ -21,7 +21,6 @@ export default function SaveButton ({id, editorStateTitle, editorStateAuthor, ti
     const handleSave = async e  => {
         e.preventDefault();
         const title = convertToRaw(editorStateTitle.getCurrentContent())
-        editorStateAuthor.getCurrentContent().blocks[0].text.replace("Author: ", "")
         const author = convertToRaw(editorStateAuthor.getCurrentContent())
         const content = convertToRaw(editorStateContent.getCurrentContent())
         const response = await saveArticle({

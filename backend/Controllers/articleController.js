@@ -29,19 +29,23 @@ const saveArticle = async (req, res) => {
 const createArticle = async (req, res) => {
     console.log(req.body)
     try{
-        const { category, title, author, time, contentState, user } = req.body; 
+        const { category, title, author, time, contentState } = req.body; 
+        const user = req.user;
+        const authorName = author.blocks[0].text
+        const authorTag = 'Auhtor: ';
+        author.blocks[0].text = authorTag.concat(author.blocks[0].text)
         const data = {
             category,
             title: title.blocks[0].text,
             titleState:title,
-            author: author.blocks[0].text,
+            author: authorName,
             authorState:author,
             time,
             content: contentState,
-            id: user.id
+            userID: user.id,
         };
         const article = await Article.create(data);
-        if (article) {
+        if (article !== null) {
             console.log("user", JSON.stringify(article,2));
             let articleInform = {id: article.id}
             console.log('articleInform',articleInform);
@@ -70,7 +74,7 @@ const postArticle = async (req, res) => {
         const {rows} = await client.query(query, [id])
         return res.status(201).send({success:true,articlesInform:rows[0]});
     } catch (error) {
-        console.log('saveArticle error');
+        console.log('postArticle error');
         console.log(error);
     } finally {
         client.end();
@@ -79,7 +83,7 @@ const postArticle = async (req, res) => {
 
 
 const showArticle = async (req, res) => {
-    const query = `SELECT "id", "title", "author", "time" from "Articles" WHERE "category" = $1`
+    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 `
     const client = new Client({
         host: '127.0.0.1',
         user: process.env.user,
@@ -91,13 +95,14 @@ const showArticle = async (req, res) => {
         const { category } = req.body; 
         await client.connect();
         const {rows} = await client.query(query, [category])
+        console.log('rows',rows)
         if (rows.length > 0) {
             return res.status(201).send({success:true,articlesInform:rows});
         } else {
             return res.status(201).send({success:false,message:'NoArticle'});
         }
     } catch (error) {
-        console.log('saveArticle error');
+        console.log('showArticle error');
         console.log(error);
     } finally {
         client.end();
@@ -105,7 +110,7 @@ const showArticle = async (req, res) => {
 }
 
 const searchArticle = async (req, res) => {
-    const query = `SELECT "id", "title", "author", "time" from "Articles" WHERE "category" = $1 AND "title" LIKE $2 `
+    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 AND "title" LIKE $2 `
     const client = new Client({
         host: '127.0.0.1',
         user: process.env.user,
@@ -123,7 +128,7 @@ const searchArticle = async (req, res) => {
             return res.status(201).send({success:false,message:'Notfind'});
         }
     } catch (error) {
-        console.log('saveArticle error');
+        console.log('searchArticle error');
         console.log(error);
     } finally {
         client.end();

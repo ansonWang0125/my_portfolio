@@ -10,22 +10,43 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import {UseLoginContext} from '../../Context/LoginCnt';
+import { removeToken } from '../../Cookies/cookies';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import './css/AccountMenu.css';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const {changeLogin} = UseLoginContext();
+  const {login, changeLogin} = UseLoginContext();
   const [click, setClick] = React.useState(false)
+  const navigate = useNavigate()
   const logout = () =>{
-    localStorage.removeItem('user');
-    changeLogin(false)
-}
+      localStorage.removeItem('user');
+      removeToken()
+      changeLogin(false)
+  }
 
-const handleLogout = async e => {
-    //e.preventDefault(); // 停止事件
-    setClick(!click)
-    logout()
-}
+  React.useEffect ( () => {
+    if (!login && click) {
+        toast.success('已登出 ! ', {
+            position:toast.POSITION.TOP_CENTER,
+            className: 'toast-success'
+        })}
+  }, [login, click])
+
+  const handleLogout = async e => {
+      //e.preventDefault(); // 停止事件
+      console.log('logout')
+      setClick(!click)
+      logout()
+  }
+  const handleProfileClick = () => {
+    navigate('/Profile')
+  }
+  const handleMyAccountClick = () => {
+    navigate('/My_Account')
+  }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -34,7 +55,7 @@ const handleLogout = async e => {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box id='menu'>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -83,16 +104,16 @@ const handleLogout = async e => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem onClick={handleProfileClick}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleMyAccountClick}>
           <Avatar /> My account
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="small" onClick={handleLogout}/>
+            <Logout fontSize="small"/>
           </ListItemIcon>
           Logout
         </MenuItem>

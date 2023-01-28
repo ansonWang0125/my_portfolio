@@ -6,6 +6,8 @@ import Work from '../../Pages/Work/Work';
 import Others from '../../Pages/Others/Others';
 import Create from '../../Pages/Create/create';
 import MyArticles from '../../Pages/My_articles/MyArticle';
+import MyAccount from '../../Pages/My_Accounts/MyAccount';
+import Profile from '../../Pages/Profile/MyProfile';
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 import {
     Routes,
@@ -34,6 +36,18 @@ const Main = () => {
                 element={
                   <ProtectedRoutes>
                     <MyArticles/>
+                  </ProtectedRoutes>}/>
+              <Route 
+                path="Profile"  
+                element={
+                  <ProtectedRoutes>
+                    <Profile/>
+                  </ProtectedRoutes>}/>
+              <Route 
+                path="My_Account"  
+                element={
+                  <ProtectedRoutes>
+                    <MyAccount/>
                   </ProtectedRoutes>}/>
             </Routes>
           </main>

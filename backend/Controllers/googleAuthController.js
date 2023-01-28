@@ -58,7 +58,7 @@ const googleOauthHandler = async (req,res,next) => {
       if (!user) {
         return res.redirect(`${process.env.origin}/oauth/error`);
       }
-      let token = jwt.sign({ id:user.id, iat: 1645869827, userName:user.email}, process.env.secretKey, {   //用jwt來為使用者生成token, secretKey是用來為jtw加密
+      let token = jwt.sign({ id:user.id, iat: 1645869827, userEmail:user.email}, process.env.secretKey, {   //用jwt來為使用者生成token, secretKey是用來為jtw加密
         expiresIn: 1 *24 * 60 * 60 * 1000       //expiresIn 是設定有效期限
       })
       res.cookie('token', token);
@@ -116,6 +116,8 @@ const googleOauthHandler = async (req,res,next) => {
       };
 
       const user = await User.create(data);
+
+      User.update({userName:name+user.id.toString(), authorName:name+user.id.toString()}, {where: {email: user.email}});
 
       if (!user) {
         return res.redirect(`${process.env.origin}/oauth/error`);

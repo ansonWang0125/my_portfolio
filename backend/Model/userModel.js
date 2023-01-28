@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         authorName: {
             type: DataTypes.STRING,
-            allowNull:true
+            allowNull:true,
+            unique: true,
         }
     }, {timestamps: true})
     return User

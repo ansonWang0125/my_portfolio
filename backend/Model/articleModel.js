@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         author: {
             type:DataTypes.STRING,
-            allowNull:false
         },
         authorState: {
             type:DataTypes.JSON,
@@ -28,10 +27,6 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.JSON,
             allowNull:false
         },
-        userID: {
-            type:DataTypes.INTEGER,
-            allowNull:false
-        }
     }, {timestamps: false})
     return Article
 }

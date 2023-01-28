@@ -82,6 +82,7 @@ const CreateArticle = () =>{
                 setHasCreate(false)
                 setIncorrect(false)
                 setSuccess(true)
+                console.log('create id',response.articleInform.id)
                 navigate(`/${category}_Articles/${title.blocks[0].text}`,{state : {id:response.articleInform.id}})
             }else if ( !response.success){
                 if ( response.message === "Something went wrong") {

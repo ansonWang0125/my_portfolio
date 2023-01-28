@@ -69,7 +69,64 @@ const login = async (req, res) => {
     }
 }
 
+const account = async (req, res) => {
+    try {
+        const user = req.user
+        const data = {authorName: user.authorName, userName: user.userName, email: user.email}
+        return res.status(201).send({success:true, data:data})
+    }catch (err) {
+        console.log('account error');
+        console.log(err);
+    }
+}
+
+const update = async (req, res) => {
+    try {
+        const user = req.user
+        console.log(req.body)
+        const {authorName, userName, email} = req.body
+        const changeEmail = email !== user.email
+        const changeUserName = userName !== user.userName
+        const changeAuthorName = authorName !== user.authorName
+        const data = {
+            userName: userName,
+            email: email,
+            authorName: authorName
+          };
+        const sameEmailUser = await User.findOne({
+            where: {
+                email: email
+            }
+        });
+        const sameNameUser = await User.findOne({
+            where: {
+                userName: userName
+            }
+        });
+        const sameNameAuthor = await User.findOne({
+            where: {
+                authorName: authorName
+            }
+        });
+        if ((!changeEmail ||(changeEmail && sameEmailUser === null)) && (!changeUserName || (changeUserName && sameNameUser === null)) && (!changeAuthorName || (changeAuthorName && sameNameAuthor === null))) {
+            User.update(data, {where: {email: user.email}});
+            return res.status(201).send({success:true, data:data})
+        }else if (changeEmail && sameEmailUser !== null){
+            return res.status(201).send({success:false, message:'This account has been used'})
+        }else if (changeUserName && sameNameUser !== null){
+            return res.status(201).send({success:false, message:'This user name has been used'})
+        }else if (changeAuthorName && sameNameAuthor !== null){
+            return res.status(201).send({success:false, message:'This author name has been used'})
+        }
+    }catch (err) {
+        console.log('update error');
+        console.log(err);
+    }
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    account,
+    update
 };

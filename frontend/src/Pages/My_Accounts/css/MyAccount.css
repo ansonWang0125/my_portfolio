@@ -1,0 +1,39 @@
+.MyAccount{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Head{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    height: 80px;
+    white-space: nowrap;
+    align-items: center;
+}
+.Head .start{ 
+    width: 30% ;
+    text-align:center;
+    font-size: 1cm;
+    font-family: Monospace;
+}
+#Body {
+    width:400px;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+}
+.data{
+    margin:3%;
+    display:flex;
+    align-items: center;
+}
+.titles{
+    white-space: nowrap;
+    margin:2%
+}
+#submitButton{
+    margin-right: auto;
+    margin-left: auto;
+}

@@ -1,18 +1,22 @@
-import  React, { useState, useEffect} from "react";
+import  React, { useState, useEffect, useRef } from "react";
 import { NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import SearchBar from "material-ui-search-bar";
+import Paper from '@mui/material/Paper';
+import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import Head from '../Head';
 import { apiArticleShow, apiArticleSearch } from '../../../axios/api';
 import dayjs from 'dayjs';
 import noresult from '../../../assets/noresult.webp'
+import ClearIcon from '@mui/icons-material/Clear';
+import useComponentVisible from "../../../hook/useComponentVisible";
 
 import './css/searchpage.css'
+import { IconButton } from "@material-ui/core";
 
 
 export default function SearchPage  ()  {
@@ -20,6 +24,8 @@ export default function SearchPage  ()  {
     const [notfind, setNotfind] = useState(false)
     const [searchStr, setSearchStr] = useState('');
     const [articles, setArticles] = useState([])
+    const {ref, isComponentVisible} = useComponentVisible(false)
+    const searchRef = useRef(null)
     async function showArticles (credentials)  {
         return apiArticleShow(credentials)
          .then(response=> {
@@ -57,8 +63,8 @@ export default function SearchPage  ()  {
         fetchData()
         setSearchStr('')
     },[])
-    const handleSearch = async () => {
-        console.log(searchStr)
+    const handleSearch = async (e) => {
+        e.preventDefault()
         if (searchStr){
             const response = await searchArticles({category:category,searchStr: searchStr})
             if (response.success) {
@@ -68,23 +74,56 @@ export default function SearchPage  ()  {
                 setNotfind(true)
             }
         }
-        // if (searchStr) props.history.push(`/list/${searchStr.split(' ').join(':')}`);
-        // else props.history.push('/');
+    }
+    const handleClick = () => {
+        searchRef.current.focus()
+    }
+    const handleClearClick = () => {
+        setSearchStr('')
     }
     return (
         <div className="page">
             <Head />
         <div className='SearchPage'>
-            <Box className='Box'>
+            <Box sx={{display: 'flex', flexDirection: 'column',justifyContent: 'center',alignItems: 'center'}}>
             <div className='Searchbar'>
-                <SearchBar
-                    onChange={(newValue) => { setSearchStr(newValue) }}
-                    onRequestSearch={() => handleSearch()}
-                    value={searchStr}
-                    style={{
-                        width: '100%'
-                    }}
-                />
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1,
+                    height: 50,
+                    },
+                }}
+                id='box'
+                ref={ref}
+            >
+                    <Paper elevation={1} id='searchPaper' onClick={handleClick}>
+                        <form onSubmit={handleSearch} id = 'searchForm'>
+                            <input id='searchinput' 
+                                   placeholder='Search'
+                                   value={searchStr}
+                                   onChange={e=>setSearchStr(e.target.value)} 
+                                   ref={searchRef}
+                                   />
+                            {isComponentVisible && searchStr ?
+                                <IconButton
+                                    onClick={handleClearClick}
+                                    type="button"
+                                >
+                                    <ClearIcon fontSize="large"/>
+                                </IconButton>
+                            :
+                                <IconButton
+                                    type="submit"
+                                >
+                                    <SearchIcon fontSize="large"/>
+                                </IconButton>
+                            }
+                        </form>
+                    </Paper>
+            </Box>
             </div>
             <div className="article-list">
             {notfind ?
@@ -111,7 +150,7 @@ export default function SearchPage  ()  {
                                                 variant="body2"
                                                 color="text.primary"
                                             >
-                                                {'Author: '+ article.author}
+                                                {'Author: '+ (article.author === article.authorName ?article.author:article.author+"("+article.authorName+")")}
                                             </Typography>
                                             {"-------Edit at "+dayjs(article.time).format('YYYY/MM/DD')}
                                             </React.Fragment>

@@ -50,7 +50,7 @@ export default function AddImage({editorState,onChange, setClicked}) {
                 }}
             >
                 <label>
-                    <input type='file'  multiple onChange={handleChange}/>
+                    <input type='file' hidden accept="image/*"  multiple onChange={handleChange}/>
                     <ListItemButton className="listItemButton">
                         <ListItemDecorator>
                             <AddPhotoAlternateIcon />

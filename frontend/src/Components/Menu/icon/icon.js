@@ -16,6 +16,7 @@ const Icon = () => {
     const {login, changeLogin} = UseLoginContext();
     const [loginData, logoutData] = logData
     const [click, setClick] = useState(false)
+
     const toggleMenu = () => {
         let menus = document.getElementById('navbarToggleExternalContent')
         if (menu){
@@ -62,16 +63,17 @@ const Icon = () => {
                         </NavLink>
                     </div>)
                     :
-                    (<div className='navbar-logout'>
+                    (<><div className='navbar-logout'>
                         <NavLink key={logoutData.id} className={styles.login} to={logoutData.link} onClick={handleLogout}>
                             {logoutData.icon}
                             <span className={styles.linkText}>{logoutData.text}</span>
                         </NavLink>
-                </div>)
+                    </div>
+                    <div className='accountMenu'>
+                        <AccountMenu />
+                    </div>   
+                    </>)
                 }
-                <div className='accountMenu'>
-                    <AccountMenu />
-                </div>
             </div>
         </nav>
     );

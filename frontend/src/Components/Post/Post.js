@@ -32,19 +32,16 @@ const  Post = () =>{
     }
     useEffect( ()=>{
         const fetchData = async () => {
-            console.log('show')
+            console.log('post id',location.state.id)
             const response = await postArticles({id:location.state.id});
-            const authorTag = 'Auhtor: ';
-            response.articlesInform.authorState.blocks[0].text = authorTag.concat(response.articlesInform.authorState.blocks[0].text)
-            console.log('Author change')
-            console.log('response',response.articlesInform)
+            // const authorTag = 'Auhtor: ';
+            // response.articlesInform.authorState.blocks[0].text = authorTag.concat(response.articlesInform.authorState.blocks[0].text)
             const initialStateTitle = EditorState.createWithContent(convertFromRaw(response.articlesInform.titleState))
             setEditorStateTitle(initialStateTitle)
             const initialStateContent = EditorState.createWithContent(convertFromRaw(response.articlesInform.content))
             setEditorStateContent(initialStateContent)
             const initialStateAuthor = EditorState.createWithContent(convertFromRaw(response.articlesInform.authorState))
             setEditorStateAuthor(initialStateAuthor)
-            console.log(response.articlesInform.time)
             setTime(dayjs(response.articlesInform.time))
         }
         fetchData()

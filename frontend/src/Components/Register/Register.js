@@ -49,7 +49,7 @@ export default function Register() {
                 className: 'toast-error'
             })}
         if (!emailValid) {
-            toast.info('Email有誤 ! ', {
+            toast.info('Email格式有誤 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-info'
             })}

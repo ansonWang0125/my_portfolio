@@ -32,8 +32,10 @@ const checkToken = async (req, res, next) => {
         console.log('decoded id =',decoded.id)
         console.log('decoded user =', decoded.userEmail)
         const user = await User.findOne({
-            id: decoded.id,
-            email: decoded.userEmail,
+            where:{
+                id: decoded.id,
+                email: decoded.userEmail,
+            }
         });
         if (user!== null) { console.log('find')}
         else { throw new Error() }

@@ -20,6 +20,7 @@ console.log(process.env.dbport)
     //connecting to model
     db.users = require('./userModel') (sequelize, DataTypes)
     db.article = require('./articleModel') (sequelize, DataTypes)
+    db.users.hasMany(db.article, {foreignKey: "userID", targeKey: "id"})
 
 //exporting the module
 module.exports = db 
