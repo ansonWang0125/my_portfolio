@@ -22,7 +22,7 @@
     "sequelize-cli": "^6.5.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "migrate": "node-pg-migrate"
   },
   "name": "backend",
