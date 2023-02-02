@@ -8,10 +8,7 @@ const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
 const path = require('path')
-const { dirname } = require('path')
 
-// define routes
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT ||4000
 
