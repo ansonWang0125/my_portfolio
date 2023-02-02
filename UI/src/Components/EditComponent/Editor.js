@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import createImagePlugin from  'draft-js-image-plugin';
 import createResizeablePlugin from 'draft-js-resizeable-plugin';
 import useStyleMap from '../styleMap/useStyleMap';
-import { makeStyles }from '@material-ui/core/styles';
+import { makeStyles }from '@material-ui/styles';
 import AddImage from './AddImage'
 import { stateToHTML } from "draft-js-export-html";
 import { inlineToolbarPlugin } from './ToolBar.js';

@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import ListItemButton from '@mui/joy/ListItemButton';
+import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import './css/draft.css';
 import { AtomicBlockUtils, EditorState } from "draft-js";
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import List from '@mui/joy/List';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import List from '@mui/material/List';
 
 
 export default function AddImage({editorState,onChange, setClicked}) {
@@ -52,12 +53,12 @@ export default function AddImage({editorState,onChange, setClicked}) {
             >
                 <label>
                     <input type='file' hidden accept="image/*"  multiple onChange={handleChange}/>
-                    <ListItemButton className="listItemButton">
-                        <ListItemDecorator>
+                    <MenuItem className="listItemButton">
+                        <ListItemIcon>
                             <AddPhotoAlternateIcon />
-                        </ListItemDecorator>
-                        Add image
-                    </ListItemButton>
+                        </ListItemIcon>
+                        <ListItemText>Add image</ListItemText>
+                    </MenuItem>
                 </label>
             </IconButton>
         </List>

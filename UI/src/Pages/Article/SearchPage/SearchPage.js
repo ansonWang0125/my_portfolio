@@ -16,7 +16,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import useComponentVisible from "../../../hook/useComponentVisible";
 
 import './css/searchpage.css'
-import IconButton from '@mui/joy/IconButton';
+import IconButton from '@mui/material/IconButton';
 
 
 export default function SearchPage  ()  {
