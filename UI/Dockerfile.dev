@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
 ## install only the packages defined in the package-lock.json (faster than the normal npm install)
-RUN yarn install
+# RUN npm install
+RUN yarn
 # Run 'npm run dev' when the container starts.
 CMD ["yan", "start"]
