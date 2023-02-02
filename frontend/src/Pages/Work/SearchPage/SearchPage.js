@@ -20,7 +20,7 @@ import IconButton from '@mui/joy/IconButton';
 
 
 export default function SearchPage  ()  {
-    const category = 'Website'
+    const category = 'Work'
     const [notfind, setNotfind] = useState(false)
     const [searchStr, setSearchStr] = useState('');
     const [articles, setArticles] = useState([])
@@ -110,11 +110,14 @@ export default function SearchPage  ()  {
                             {isComponentVisible && searchStr ?
                                 <IconButton
                                     onClick={handleClearClick}
+                                    type="button"
                                 >
                                     <ClearIcon fontSize="large"/>
                                 </IconButton>
                             :
-                                <IconButton>
+                                <IconButton
+                                    type="submit"
+                                >
                                     <SearchIcon fontSize="large"/>
                                 </IconButton>
                             }
@@ -135,7 +138,7 @@ export default function SearchPage  ()  {
                             <div key={article.id}>
                                 <ListItem alignItems="flex-start" >
                                     <ListItemText
-                                        primary= { <NavLink to={`/Website_Articles/${article.title}`} 
+                                        primary= { <NavLink to={`/Work_Articles/${article.title}`} 
                                                             className='listitem'
                                                             state={{id:article.id, readOnly:true}}>
                                                     {article.title}</NavLink> }

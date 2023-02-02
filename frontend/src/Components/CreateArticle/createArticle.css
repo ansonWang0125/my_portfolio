@@ -23,6 +23,16 @@
     justify-content: right;
     align-items: center;
 }
+.contentInput{
+    display:flex;
+    flex-direction: column;
+}
+#select-required{
+    width: 215.63px;
+}
+#content-required{
+    width: 100%;
+}
 .createbutton{
     padding:2%;
     display:flex;

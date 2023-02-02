@@ -28,14 +28,7 @@ export const apiArticleCreate = data => articleRequest.post('/create',data);
 export const apiArticleShow = data => articleRequest.post('/show', data);
 export const apiArticlePost = data => articleRequest.post('/post', data);
 export const apiArticleSearch = data => articleRequest.post('/search', data);
-
-
-const read_token = process.env.REACT_APP_READ_TOKEN;
-
-export const apiBlogList = async () => {
-  const url = `
-  https://api.buttercms.com/v2/posts?auth_token=${read_token}`;
-  return axios.get(url).then((res) => {
-    return res.data.data;
-  });
-};
+export const apiArticleMainShow = data => articleRequest.post('/mainShow', data);
+export const apiArticleMyShow = data => articleRequest.post('/myShow', data);
+export const apiArticleMySearch = data => articleRequest.post('/mySearch', data);
+export const apiArticleDelete = data => articleRequest.post('/delete', data);

@@ -24,7 +24,7 @@ export const navData = [
         id: 2,
         icon: <WorkIcon/>,
         text: "Work",
-        link: "Work",
+        link: "Work_Articles",
         needLogin: false
     },
     {

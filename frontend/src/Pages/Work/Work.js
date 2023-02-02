@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
-import Head from './Head';
-import Body from './Body';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
+import Post from '../../Components/Post/Post'
+import SearchPage from "./SearchPage/SearchPage"
+import { Route, Routes } from "react-router-dom";
+import './Work.css'
+
 
 const Work = () => {
     const {changeTitle} = UseTitleContext();
@@ -10,8 +13,10 @@ const Work = () => {
     }, [changeTitle])
     return (
         <div className="Work">
-            <Head />
-            <Body />
+            <Routes>
+                <Route path="/" element={<SearchPage/>} />
+                <Route path="/:id" element={<Post /> } />
+            </Routes>
         </div>
     );
 }

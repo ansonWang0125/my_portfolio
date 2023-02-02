@@ -32,6 +32,7 @@ export default function AddImage({editorState,onChange, setClicked}) {
         }
     }, [file, editorState, onChange, setClicked])
     const handleChange = (event) => {
+        console.log('url: ',URL.createObjectURL(event.target.files[0]))
         setFile(URL.createObjectURL(event.target.files[0]))
     }
     return (

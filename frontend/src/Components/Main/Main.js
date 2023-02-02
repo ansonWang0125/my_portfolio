@@ -23,8 +23,8 @@ const Main = () => {
             <Routes>
               <Route path='/*' element={<Mainblog />}/>
               <Route path='Website_Articles/*' element={<Article />}/>
-              <Route path='work' element={<Work />}/>
-              <Route path='Other_Articles' element={<Others />}/>
+              <Route path='Work_Articles/*' element={<Work />}/>
+              <Route path='Other_Articles/*' element={<Others />}/>
               <Route 
                 path="Create" 
                 element={
@@ -32,13 +32,13 @@ const Main = () => {
                     <Create/>
                   </ProtectedRoutes>}/>
               <Route 
-                path="My_Articles"  
+                path="My_Articles/*"  
                 element={
                   <ProtectedRoutes>
                     <MyArticles/>
                   </ProtectedRoutes>}/>
               <Route 
-                path="Profile"  
+                path="Profile/*"  
                 element={
                   <ProtectedRoutes>
                     <Profile/>

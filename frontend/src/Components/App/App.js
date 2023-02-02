@@ -10,6 +10,7 @@ import Register from '../Register/Register'
 import './css/App.css';
 import React from 'react';
 import Main from '../Main/Main';
+import Error from '../../Pages/Error/Error'
 import { ToastContainer} from 'react-toastify';
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/*' element={<Main/>}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/oauth/error' element={<Error />}/>
         </Routes>
         </LoginContextProvider>
       </TitleContextProvider >

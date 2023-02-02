@@ -3,6 +3,8 @@ require('dotenv').config();
 const db = require("../Model");
 const jwt = require("jsonwebtoken");
 
+const Op = db.Sequelize.Op
+
 const User = db.users;
 let AppError = require('../utils/appError');
 
@@ -115,14 +117,24 @@ const googleOauthHandler = async (req,res,next) => {
         authorName: name,
       };
 
-      const user = await User.create(data);
+      const sameNameUser = await User.findOne({
+        where: {
+            [Op.or]: [{userName: name}, {authorName: name}]
+        }});
 
-      User.update({userName:name+user.id.toString(), authorName:name+user.id.toString()}, {where: {email: user.email}});
-
-      if (!user) {
+      if ( sameNameUser !== null){
+        console.log('sameuser')
         return res.redirect(`${process.env.origin}/oauth/error`);
+      }else{
+
+        const user = await User.create(data);
+
+        if (!user) {
+          console.log('what happened')
+          return res.redirect(`${process.env.origin}/oauth/error`);
+        }
+        res.redirect(`${process.env.origin}${pathUrl}`);
       }
-      res.redirect(`${process.env.origin}${pathUrl}`);
   
     } catch (err) {
       console.log('Failed to authorize Google User', err);

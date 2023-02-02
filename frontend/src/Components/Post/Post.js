@@ -17,6 +17,7 @@ const  Post = () =>{
     const[editorStateContent, setEditorStateContent] = useState(EditorState.createEmpty())
     const[editorStateAuthor, setEditorStateAuthor] = useState(EditorState.createEmpty())
     const [time, setTime] = useState(dayjs());
+    const readOnly = location.state.readOnly
 
     async function postArticles (credentials)  {
         return apiArticlePost(credentials)
@@ -53,31 +54,29 @@ const  Post = () =>{
 
     const authorPlaceholder='author name'
 
-    const [isEditor, setIsEditor] = useState(false)
-
 
     return (
         <div className="container">
             <div className='post'>
                 <ToolBar />
                 <div className='title'>
-                    <MyEditor placeholder={titlePlaceholder} editorState={editorStateTitle} setEditorState={setEditorStateTitle} allowAdd={false}/>
+                    <MyEditor placeholder={titlePlaceholder} editorState={editorStateTitle} setEditorState={setEditorStateTitle} readOnly={readOnly} allowAdd={false}/>
                 </div>
                 <div className='editInform'>
                     <span className='author'>
-                        <MyEditor placeholder={authorPlaceholder} editorState={editorStateAuthor} setEditorState={setEditorStateAuthor} allowAdd={false}/>
+                        <span id='authorSpan'>Author: </span>
+                        <MyEditor placeholder={authorPlaceholder} editorState={editorStateAuthor} setEditorState={setEditorStateAuthor} readOnly={readOnly} allowAdd={false}/>
                     </span>
                     <span className='time'>
-                        {isEditor ? <DataPicker setTime={setTime} time={time}/> : <div className='datestring'>Edit Time: {time.format('DD/MM/YYYY') }</div>}
-                        {/* <MyEditor text={time} placeholder={timePlaceholder} editorState={editorStateTime} setEditorState={setEditorStateTime} allowAdd={false}/> */}
+                        {readOnly ? <div className='datestring'>Edit Time: {time.format('DD/MM/YYYY') }</div> : <DataPicker setTime={setTime} time={time}/> }
                     </span>
                 </div>
                 <div className='content'>
-                    <MyEditor placeholder={contentPlaceholder} editorState={editorStateContent} setEditorState={setEditorStateContent} allowAdd={true}/>
+                    <MyEditor placeholder={contentPlaceholder} editorState={editorStateContent} setEditorState={setEditorStateContent} readOnly={readOnly} allowAdd={true}/>
                 </div>
             </div>
             <div >
-                <SaveButton id={location.state.id} editorStateTitle={editorStateTitle} editorStateAuthor={editorStateAuthor} time={time} editorStateContent={editorStateContent}/>
+                {readOnly ? <></>:<SaveButton id={location.state.id} editorStateTitle={editorStateTitle} editorStateAuthor={editorStateAuthor} time={time} editorStateContent={editorStateContent}/>}
             </div>
         </div>
     );

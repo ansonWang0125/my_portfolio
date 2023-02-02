@@ -1,6 +1,36 @@
 .body {
     /* display:inline-block; */
-    text-align:center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#label {
+    font-size: 20px;
+    font-family:'SimSun';
+}
+
+#content {
+    width: 50%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-Time{
+    text-align: center;
+    width:10%;
+}
+
+#article-data{
+    width:90%;
+}
+
+.MuiList-root {
+    width:100%
 }
 
 .illustration {
@@ -19,4 +49,11 @@
     cursor: pointer;
     color:#1c80e4;
     text-decoration:none;
+}
+
+.emptyList-wrap {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

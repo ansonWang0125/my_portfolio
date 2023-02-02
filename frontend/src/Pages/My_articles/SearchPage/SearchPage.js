@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import Head from '../Head';
-import { apiArticleShow, apiArticleSearch } from '../../../axios/api';
+import { apiArticleMyShow, apiArticleMySearch } from '../../../axios/api';
 import dayjs from 'dayjs';
 import noresult from '../../../assets/noresult.webp'
 import ClearIcon from '@mui/icons-material/Clear';
@@ -20,14 +20,13 @@ import IconButton from '@mui/joy/IconButton';
 
 
 export default function SearchPage  ()  {
-    const category = 'Website'
     const [notfind, setNotfind] = useState(false)
     const [searchStr, setSearchStr] = useState('');
     const [articles, setArticles] = useState([])
     const {ref, isComponentVisible} = useComponentVisible(false)
     const searchRef = useRef(null)
     async function showArticles (credentials)  {
-        return apiArticleShow(credentials)
+        return apiArticleMyShow(credentials)
          .then(response=> {
             if (response.status === 201) {
                 return response.data
@@ -39,7 +38,7 @@ export default function SearchPage  ()  {
          })
     }
     async function searchArticles (credentials)  {
-        return apiArticleSearch(credentials)
+        return apiArticleMySearch(credentials)
          .then(response=> {
             if (response.status === 201) {
                 return response.data
@@ -52,7 +51,7 @@ export default function SearchPage  ()  {
     }
     useEffect( ()=>{
         const fetchData = async () => {
-            const response = await showArticles({category});
+            const response = await showArticles();
             if (response.success) {
                 setArticles(response.articlesInform)
                 setNotfind(false)
@@ -66,7 +65,7 @@ export default function SearchPage  ()  {
     const handleSearch = async (e) => {
         e.preventDefault()
         if (searchStr){
-            const response = await searchArticles({category:category,searchStr: searchStr})
+            const response = await searchArticles({searchStr: searchStr})
             if (response.success) {
                 setArticles(response.articlesInform)
                 setNotfind(false)
@@ -110,11 +109,14 @@ export default function SearchPage  ()  {
                             {isComponentVisible && searchStr ?
                                 <IconButton
                                     onClick={handleClearClick}
+                                    type="button"
                                 >
                                     <ClearIcon fontSize="large"/>
                                 </IconButton>
                             :
-                                <IconButton>
+                                <IconButton
+                                    type="submit"
+                                >
                                     <SearchIcon fontSize="large"/>
                                 </IconButton>
                             }
@@ -135,7 +137,7 @@ export default function SearchPage  ()  {
                             <div key={article.id}>
                                 <ListItem alignItems="flex-start" >
                                     <ListItemText
-                                        primary= { <NavLink to={`/Website_Articles/${article.title}`} 
+                                        primary= { <NavLink to={`/Other_Articles/${article.title}`} 
                                                             className='listitem'
                                                             state={{id:article.id, readOnly:true}}>
                                                     {article.title}</NavLink> }

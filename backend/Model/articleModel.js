@@ -25,8 +25,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         content: {
             type:DataTypes.JSON,
+        },
+        createTime: {
+            type:DataTypes.DATE,
             allowNull:false
         },
+        searchTimes: {
+            type:DataTypes.INTEGER,
+            allowNull:false
+        }
     }, {timestamps: false})
     return Article
 }

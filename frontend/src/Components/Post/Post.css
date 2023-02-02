@@ -22,8 +22,15 @@
     width: 100%;
 }
 .editInform .author{
+    font-size: 14px;
     float:left;
-    width:40%
+    width:40%;
+    display: flex;
+    align-items: center;
+}
+#authorSpan {
+    padding:3%;
+    /* padding-left: 0% */
 }
 .editInform .time{
     float:right;
@@ -38,6 +45,7 @@
 .title .DraftEditor-root {
     font-size: 30px;
 }
+
 .author .DraftEditor-root {
     font-size: 14px;
 }
@@ -56,6 +64,6 @@
 .author .makeStyles-draftEditorContainer-1{
 
     width:100%;
-    padding:3%;
+
 }
 

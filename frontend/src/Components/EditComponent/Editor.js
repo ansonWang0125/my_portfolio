@@ -23,10 +23,11 @@ import {linkPlugin} from './ToolBar.js';
         userSelect:'none',
     },
     },}))
-  
-  export default function MyEditor ({editorState, setEditorState, placeholder, allowAdd}) {
 
     const plugins = [resizeablePlugin, imagePlugin, inlineToolbarPlugin, linkPlugin]
+  
+  export default function MyEditor ({editorState, setEditorState, placeholder, readOnly, allowAdd}) {
+
 
     const classes = useStyles()
 
@@ -104,6 +105,7 @@ import {linkPlugin} from './ToolBar.js';
       >
             <Editor
               style={{float:'none'}}
+              readOnly={readOnly}
               editorState={editorState}
               onChange={onChange}
               plugins={plugins}

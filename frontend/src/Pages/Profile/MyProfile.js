@@ -1,8 +1,9 @@
-import Head from './Head';
-import Body from './Body';
 import React, {useEffect} from 'react';
 import { UseTitleContext } from '../../Context/TitleContextProvider';
 import './css/Profile.css'
+import Post from '../../Components/Post/Post'
+import SearchPage from "./SearchPage/SearchPage"
+import { Route, Routes } from "react-router-dom";
 
 export default function Profile () {
     const {changeTitle} = UseTitleContext();
@@ -12,8 +13,10 @@ export default function Profile () {
     }, [changeTitle])
     return (
         <div className="profile">
-            <Head />
-            <Body />
+            <Routes>
+                <Route path="/" element={<SearchPage/>} />
+                <Route path="/:id" element={<Post /> } />
+            </Routes>
         </div>
     )
 }

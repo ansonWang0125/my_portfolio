@@ -1,0 +1,15 @@
+#wrap{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+#Error{
+    width:70%;
+    text-align: center;;
+}
+#Link{
+    padding: 10px 20px;
+    cursor: pointer;
+    color:#388de2;
+    text-decoration:none;
+}

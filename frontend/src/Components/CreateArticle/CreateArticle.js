@@ -3,9 +3,6 @@ import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from '@mui/material/Button';
 import './createArticle.css'
 import { apiArticleCreate } from '../../axios/api';
@@ -19,16 +16,16 @@ import { useNavigate } from "react-router-dom";
 
 const CreateArticle = () =>{
     const [valid, setValid] = useState(false)
-    const [time, setTime] = useState(dayjs());
     const [category, setCategory] = useState('');
     const [title, setTitle] = useState(EditorState.createEmpty());
     const [author, setAuthor] = useState(EditorState.createEmpty());
+    const [content, setContent] = useState(convertToRaw(ContentState.createFromText('New Content')));
     const [success, setSuccess] = useState();
     const [hascreate, setHasCreate] = useState(false);
     const [incorrect, setIncorrect] = useState(false);
     const [click, setClick] = useState();
     const formRef = useRef()
-    const content = 'New Content'
+    const time = dayjs()
     const navigate = useNavigate();
 
     useEffect ( () => {
@@ -67,14 +64,12 @@ const CreateArticle = () =>{
         if (valid){
             console.log('success')
             console.log('Author: ', author)
-            const contentState = convertToRaw(ContentState.createFromText(content))
-            console.log(contentState)
             const response = await createArticle({
                 category,
                 title,
                 author,
                 time,
-                contentState
+                content
             });
 
             console.log(response);
@@ -83,7 +78,7 @@ const CreateArticle = () =>{
                 setIncorrect(false)
                 setSuccess(true)
                 console.log('create id',response.articleInform.id)
-                navigate(`/${category}_Articles/${title.blocks[0].text}`,{state : {id:response.articleInform.id}})
+                navigate(`/${category}_Articles/${title.blocks[0].text}`,{state : {id:response.articleInform.id, readOnly:false}})
             }else if ( !response.success){
                 if ( response.message === "Something went wrong") {
                     setSuccess(false)
@@ -98,9 +93,6 @@ const CreateArticle = () =>{
             setClick(!click)
         }
 
-    };
-    const handleChange = (newValue) => {
-        setTime(newValue);
     };
     const handleChangeContentState = (input, setValue) => {
         const contentState = convertToRaw(ContentState.createFromText(input))
@@ -132,7 +124,7 @@ const CreateArticle = () =>{
                         id="select-required"
                         value={category}
                         onChange={e=>{setCategory(e.target.value)}}
-                        style={{width: 215.63,height:40, margin:'2%'}}
+                        style={{width: '215.63px',height:'40px', margin:'3%'}}
                         required
                         defaultValue={""}
                         >
@@ -162,18 +154,19 @@ const CreateArticle = () =>{
                         onChange={e=>handleChangeContentState(e.target.value, setAuthor)}
                     />
                 </div>
-                <div className="inputitem">
-                    <span className="inline">Create Time: </span>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DesktopDatePicker
-                            required
-                            label="Date desktop"
-                            inputFormat="MM/DD/YYYY"
-                            value={time}
-                            onChange={handleChange}
-                            renderInput={(params) => <TextField size='small'{...params} />}
-                        />
-                    </LocalizationProvider>
+                <br/>
+                <div className="contentInput">
+                    <span className="inline">Some Description: </span>
+                    <TextField
+                        required
+                        id="content-required"
+                        size='small'
+                        defaultValue='New Content'
+                        multiline
+                        style={{width: '100%', marginLeft:'0%'}}
+                        rows={6}
+                        onChange={e=>handleChangeContentState(e.target.value, setContent)}
+                    />
                 </div>
                 <div className='createbutton'>
                     <Button type="submit" size='small' variant='outlined' color='primary' onClick={handleBtnClick}>Create Article</Button>
