@@ -31,9 +31,9 @@ app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);
 
-app.use(express.static(path.join(__dirname, "frontend", "build")));
+app.use(express.static(path.join(__dirname, "UI", "build")));
 app.get("/*", (_, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "UI", "build", "index.html"));
 });
 
 app.listen(PORT, () => console.log(`API is runing on ${PORT}`));
