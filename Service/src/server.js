@@ -9,7 +9,6 @@ const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
 const path = require('path')
 const http = require('http')
-const cors = require('cors');
 
 
 const PORT = process.env.PORT ||10000
