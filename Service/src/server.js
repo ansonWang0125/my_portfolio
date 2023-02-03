@@ -35,12 +35,12 @@ app.get("/*", (_, res) => {
   res.sendFile(path.join(__dirname,"..","..", "UI", "build", "index.html"));
 });
 
-// app.listen(PORT, function(err){ 
-//   if (err) console.log("Error in server setup") 
-//   console.log("Server listening on Port", PORT); 
-// })
+app.listen(PORT, function(err){ 
+  if (err) console.log("Error in server setup") 
+  console.log("Server listening on Port", PORT); 
+})
 
-const httpServer = http.createServer(app);
-httpServer.listen(PORT, () => {
-  console.log(`🚀 Server Ready at ${PORT}! 🚀`)
-});
+// const httpServer = http.createServer(app);
+// httpServer.listen(PORT, () => {
+//   console.log(`🚀 Server Ready at ${PORT}! 🚀`)
+// });
