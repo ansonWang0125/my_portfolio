@@ -20,11 +20,11 @@ const corsOptions ={
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200,
 }
+app.use(cors(corsOptions));
 
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cors(corsOptions));
 
 db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
@@ -38,6 +38,7 @@ app.use('/api/sessions', sessionRouter);
 
 app.use(express.static(path.join(__dirname, "..", "..", "UI", "build")));
 app.get("/*", (_, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname,"..","..", "UI", "build", "index.html"));
 });
 
