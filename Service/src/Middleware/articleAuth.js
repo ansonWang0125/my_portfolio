@@ -5,11 +5,12 @@ require('dotenv').config()
 
 const saveArticle = async (req, res, next) => {
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
-        port: process.env.dbport
+        port: process.env.dbport,
+        ssl: true
     });
     console.log(req.body)
     const query = `SELECT * FROM "Articles" WHERE "title" = $1 AND "author" = $2 AND "id" != $3` 
@@ -32,11 +33,12 @@ const saveArticle = async (req, res, next) => {
 
 const createArticle = async (req, res, next) => {
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
-        port: process.env.dbport
+        port: process.env.dbport,
+        ssl: true
     });
     console.log(req.body)
     const query = `SELECT * FROM "Articles" WHERE "title" = $1 AND "author" = $2 ` 
