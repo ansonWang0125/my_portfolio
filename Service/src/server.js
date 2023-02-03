@@ -9,26 +9,24 @@ const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
 const path = require('path')
 const http = require('http')
-const {setHeader} = require('./utils/setHeader')
 
 
 const PORT = process.env.PORT ||10000
 
 const app = express();
-
+app.use(cors())
 
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cors())
 
 db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
-app.use('/api/users', setHeader, userRoutes)
-app.use('/api/article', setHeader, articleRoutes)
-app.use('/api/sessions',setHeader, sessionRouter);
+app.use('/api/users', userRoutes)
+app.use('/api/article', articleRoutes)
+app.use('/api/sessions', sessionRouter);
 
 
 app.use(express.static(path.join(__dirname, "..", "..", "UI", "build")));
