@@ -15,6 +15,8 @@ import { getGoogleUrl } from '../../utils/getGoogleUrl';
 
 const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT_SIGNUP
 
+console.log('redirect_uri',redirect_uri)
+
 export default function Register() {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
