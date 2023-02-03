@@ -5,7 +5,7 @@ const Article = db.article;
 
 const saveArticle = async (req, res) => {
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -63,7 +63,7 @@ const postArticle = async (req, res) => {
     const query = `SELECT "titleState", "authorState", "time", "content" from "Articles" WHERE "id" = $1`
     const updateQuery = `UPDATE "Articles" SET "searchTimes" = "searchTimes" + 1 WHERE "id" = $1` 
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -87,7 +87,7 @@ const postArticle = async (req, res) => {
 const showArticle = async (req, res) => {
     const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -114,7 +114,7 @@ const mainShowArticle = async (req, res) => {
     const newQuery = `SELECT "Articles"."id", "title", "author", "time", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "createTime" DESC; `
     const hotQuery = `SELECT "Articles"."id", "title", "author", "time", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "searchTimes" DESC; `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -140,7 +140,7 @@ const mainShowArticle = async (req, res) => {
 const searchArticle = async (req, res) => {
     const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 AND "title" LIKE $2 `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -166,7 +166,7 @@ const searchArticle = async (req, res) => {
 const myShowArticle = async (req, res) => {
     const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -191,7 +191,7 @@ const myShowArticle = async (req, res) => {
 const mySearchArticle = async (req, res) => {
     const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 AND "title" LIKE $2 `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,
@@ -216,7 +216,7 @@ const mySearchArticle = async (req, res) => {
 const deleteArticle = async (req, res) => {
     const checkQuery = `SELECT "id" FROM "Articles" WHERE "userID" = $1 `
     const client = new Client({
-        host: '127.0.0.1',
+        host: process.env.host,
         user: process.env.user,
         database: process.env.databaseName,
         password: process.env.password,

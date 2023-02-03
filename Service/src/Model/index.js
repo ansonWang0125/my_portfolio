@@ -4,8 +4,8 @@ require('dotenv').config()
 
 console.log(process.env.dbport)
 
-    const sequelize = new Sequelize(`postgres://${process.env.user}:${process.env.password}@localhost:${process.env.dbport}/${process.env.databaseName}`, {dialect: process.env.database})
-
+    //const sequelize = new Sequelize(`postgres://${process.env.user}:${process.env.password}@127.0.0.1:${process.env.dbport}/${process.env.databaseName}`, {dialect: process.env.database})
+    const sequelize = new Sequelize(process.env.url, {dialect: process.env.database})
     //checking if connection is done
         sequelize.authenticate().then(() => {
             console.log(`Database connected to discover`)

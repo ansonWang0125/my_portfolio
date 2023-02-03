@@ -1,11 +1,12 @@
 {
     "db": {
-      "user": "postgres",
-      "password": "12341234",
-      "host": "localhost",
+      "user": "anson",
+      "password": "gnvirf0FCs6dMQgVdERpRV4lhsVx1S0i",
+      "host": "dpg-cfebre1mbjsqnjlt48qg-a.oregon-postgres.render.com",
       "port": 5432,
       "database": "my_portfolio",
       "config": "./config.json",
       "migration-filename-format": "utc"
     }
   }
+  
