@@ -11,6 +11,7 @@
     "dotenv": "^16.0.3",
     "firebase": "^9.15.0",
     "google-auth-library": "^8.7.0",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.3",
     "node-pg-migrate": "^6.2.2",
