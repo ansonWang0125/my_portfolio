@@ -15,7 +15,12 @@ const PORT = process.env.PORT ||10000
 
 const app = express();
 
-app.use(cors());
+const corsOptions ={
+  origin:'https://post-articles.onrender.com', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 
 app.use(express.json())
