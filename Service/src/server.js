@@ -41,7 +41,7 @@ app.get("/*", (_, res) => {
   res.sendFile(path.join(__dirname,"..","..", "UI", "build", "index.html"));
 });
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
   res.set('Access-Control-Allow-Origin', '*');
   res.end('hello world');
 });
