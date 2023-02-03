@@ -11,10 +11,16 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 const userRequest = axios.create({
     baseURL: 'http://localhost:10000/api/users',
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
 });
 
 const articleRequest = axios.create({
   baseURL: 'http://localhost:10000/api/article',
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
 });
 
 
