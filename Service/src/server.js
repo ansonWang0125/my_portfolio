@@ -25,9 +25,10 @@ db.sequelize.sync().then(() => {    //drop table if exists
 })
 
 console.log('__dirname', __dirname)
-app.use(express.static(path.join(__dirname,"..", "UI", "build")));
+console.log('path', path.join(__dirname, "..", "..", "UI", "build"))
+app.use(express.static(path.join(__dirname, "..", "..", "UI", "build")));
 app.get("/*", (_, res) => {
-  res.sendFile(path.join(__dirname,"..", "UI", "build", "index.html"));
+  res.sendFile(path.join(__dirname,"..","..", "UI", "build", "index.html"));
 });
 
 app.use('/api/users', userRoutes)
