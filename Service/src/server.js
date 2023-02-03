@@ -25,12 +25,6 @@ db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
-// app.use((req, res, next) => {
-//   res.append('Access-Control-Allow-Origin', ['*']);
-//   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   res.append('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);
