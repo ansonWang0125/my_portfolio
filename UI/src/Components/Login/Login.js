@@ -14,9 +14,9 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
+import { REACT_APP_GOOGLE_OAUTH_REDIRECT } from '/etc/secrets/.env'
 
-
-const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT
+const redirect_uri = REACT_APP_GOOGLE_OAUTH_REDIRECT
 
 
 export default function Login() {
