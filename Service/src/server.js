@@ -38,8 +38,12 @@ app.use('/api/sessions', sessionRouter);
 
 app.use(express.static(path.join(__dirname, "..", "..", "UI", "build")));
 app.get("/*", (_, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname,"..","..", "UI", "build", "index.html"));
+});
+
+app.get('/', function (req, res) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.end('hello world');
 });
 
 
