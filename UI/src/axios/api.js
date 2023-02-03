@@ -10,11 +10,11 @@ if ( getAuthToken() )
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
 
 const userRequest = axios.create({
-    baseURL: 'http://localhost:4000/api/users',
+    baseURL: 'http://localhost:10000/api/users',
 });
 
 const articleRequest = axios.create({
-  baseURL: 'http://localhost:4000/api/article',
+  baseURL: 'http://localhost:10000/api/article',
 });
 
 
