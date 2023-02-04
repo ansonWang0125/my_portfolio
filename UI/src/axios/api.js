@@ -13,6 +13,10 @@ const envRequest = axios.create({
   baseURL: 'https://post-articles.onrender.com/api/env',
 });
 
+const imageRequest = axios.create({
+  baseURL: 'https://post-articles.onrender.com/api/image',
+});
+
 const userRequest = axios.create({
     baseURL: 'https://post-articles.onrender.com/api/users',
 });
@@ -20,6 +24,8 @@ const userRequest = axios.create({
 const articleRequest = axios.create({
   baseURL: 'https://post-articles.onrender.com/api/article',
 });
+
+export const apiGetImage = data => imageRequest.post('/upload', data);
 
 export const apiGetEnv = data => envRequest.post('/getenv', data);
 

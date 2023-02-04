@@ -12,12 +12,14 @@ import { apiArticlePost } from '../../axios/api';
 const  Post = () =>{
 
     const location = useLocation()
+    const href = window.location.href
+    console.log(href)
 
     const[editorStateTitle, setEditorStateTitle] = useState(EditorState.createEmpty())
     const[editorStateContent, setEditorStateContent] = useState(EditorState.createEmpty())
     const[editorStateAuthor, setEditorStateAuthor] = useState(EditorState.createEmpty())
     const [time, setTime] = useState(dayjs());
-    const readOnly = location.state.readOnly
+    const readOnly = location.state?.readOnly || true;
 
     async function postArticles (credentials)  {
         return apiArticlePost(credentials)

@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 require('dotenv').config();
 const db = require('./Model')
 const envRoutes = require('./Routes/envRoutes')
+const imageRoutes = require('./Routes/imageRoutes')
 const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
@@ -27,6 +28,7 @@ db.sequelize.sync().then(() => {    //drop table if exists
 })
 
 app.use('/api/env', envRoutes)
+app.use('api/image', imageRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);
