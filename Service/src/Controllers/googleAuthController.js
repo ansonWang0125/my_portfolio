@@ -127,11 +127,15 @@ const googleOauthHandler = async (req,res,next) => {
         return res.redirect(`${process.env.origin}/oauth/error`);
       }else{
 
-        const user = await User.create(data);
-
-        if (!user) {
-          console.log('what happened')
-          return res.redirect(`${process.env.origin}/oauth/error`);
+        const userExist = await User.findOne({
+          where: {
+              email: email,
+          },
+        });
+        if (userExist !== null) {
+          await User.update(data, {where:{email: email}})
+        } else {
+          await User.create(data);
         }
         res.redirect(`${process.env.origin}${pathUrl}`);
       }
