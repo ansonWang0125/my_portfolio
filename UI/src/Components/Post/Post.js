@@ -13,13 +13,14 @@ const  Post = () =>{
 
     const location = useLocation()
     const href = window.location.href
-    console.log(href)
+    const id = href.substring(href.lastIndexOf('/')+1).split("=")[1]
 
     const[editorStateTitle, setEditorStateTitle] = useState(EditorState.createEmpty())
     const[editorStateContent, setEditorStateContent] = useState(EditorState.createEmpty())
     const[editorStateAuthor, setEditorStateAuthor] = useState(EditorState.createEmpty())
     const [time, setTime] = useState(dayjs());
-    const readOnly = location.state?.readOnly || true;
+    const readOnly = (location.state !== null ? location.state.readOnly : true);
+    const articleID = (location.state !== null ? location.state.id : id)
 
     async function postArticles (credentials)  {
         return apiArticlePost(credentials)
@@ -35,8 +36,8 @@ const  Post = () =>{
     }
     useEffect( ()=>{
         const fetchData = async () => {
-            console.log('post id',location.state.id)
-            const response = await postArticles({id:location.state.id});
+            console.log('post id',articleID)
+            const response = await postArticles({id:articleID});
             // const authorTag = 'Auhtor: ';
             // response.articlesInform.authorState.blocks[0].text = authorTag.concat(response.articlesInform.authorState.blocks[0].text)
             const initialStateTitle = EditorState.createWithContent(convertFromRaw(response.articlesInform.titleState))
@@ -48,7 +49,7 @@ const  Post = () =>{
             setTime(dayjs(response.articlesInform.time))
         }
         fetchData()
-    },[location.state.id])
+    },[articleID])
 
     const titlePlaceholder = 'Title'
 
@@ -78,7 +79,7 @@ const  Post = () =>{
                 </div>
             </div>
             <div >
-                {readOnly ? <></>:<SaveButton id={location.state.id} editorStateTitle={editorStateTitle} editorStateAuthor={editorStateAuthor} time={time} editorStateContent={editorStateContent}/>}
+                {readOnly ? <></>:<SaveButton id={articleID} editorStateTitle={editorStateTitle} editorStateAuthor={editorStateAuthor} time={time} editorStateContent={editorStateContent}/>}
             </div>
         </div>
     );

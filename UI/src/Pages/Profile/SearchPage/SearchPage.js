@@ -288,11 +288,11 @@ export default function SearchPage  ()  {
                                                 <ListItemText
                                                     primary= { 
                                                                 <>
-                                                                <NavLink to={`/Other_Articles/${article.title}`} 
+                                                                <NavLink to={`/Other_Articles/id=${article.id}`} 
                                                                         className='listitem'
                                                                         state={{id:article.id, readOnly:true}}>
                                                                 {article.title}</NavLink> 
-                                                                <NavLink to={`/Other_Articles/${article.title}`} 
+                                                                <NavLink to={`/Other_Articles/id=${article.id}`} 
                                                                         className='listitem'
                                                                         state={{id:article.id, readOnly:false}}>
                                                                     <IconButton edge="end" aria-label="comments">
