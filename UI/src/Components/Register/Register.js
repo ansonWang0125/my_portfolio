@@ -12,10 +12,9 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
+import { UseEnvContext } from '../../Context/envCnt';
 
-const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT_SIGNUP
 
-console.log('redirect_uri',redirect_uri)
 
 export default function Register() {
     const [userName, setUserName] = useState('');
@@ -27,10 +26,12 @@ export default function Register() {
     const [emailValid, setEmailValid] = useState(true);
     const [valid, setValid] = useState(false);
     const [click, setClick] = useState(false);
+    const {env} = UseEnvContext();
     const {setData} = useData();
     const navigate = useNavigate();
     const formRef = useRef()
     let from = '/login';
+    const redirect_uri = env.redirect_signup
     
     
 

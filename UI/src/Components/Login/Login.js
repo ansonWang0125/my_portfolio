@@ -14,9 +14,8 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
+import { UseEnvContext } from '../../Context/envCnt';
 
-
-const redirect_uri = process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT
 
 
 export default function Login() {
@@ -30,10 +29,13 @@ export default function Login() {
     const {setData} = useData();
     const {changeLogin} = UseLoginContext();
     const navigate = useNavigate();
+    const {env} = UseEnvContext();
     const formRef = useRef()
 
     const location = useLocation();
     let from = ((location.state)?.from?.pathname) || '/';
+
+    const redirect_uri = env.redirect_login
 
 
     useEffect ( () => {

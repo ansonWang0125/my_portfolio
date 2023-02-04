@@ -9,6 +9,10 @@ if ( getAuthToken() )
   token = getAuthToken()
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
 
+const envRequest = axios.create({
+  baseURL: 'https://post-articles.onrender.com/api/env',
+});
+
 const userRequest = axios.create({
     baseURL: 'https://post-articles.onrender.com/api/users',
 });
@@ -17,6 +21,7 @@ const articleRequest = axios.create({
   baseURL: 'https://post-articles.onrender.com/api/article',
 });
 
+export const apiGetEnv = data => envRequest.post('/getenv', data);
 
 export const apiUserLogin = data => userRequest.post('/login', data);
 export const apiUserSignUp = data => userRequest.post('/signup', data);

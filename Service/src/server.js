@@ -2,6 +2,7 @@ const sequelize = require('sequelize');
 const dotenv = require('dotenv');
 require('dotenv').config();
 const db = require('./Model')
+const envRoutes = require('./Routes/envRoutes')
 const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
@@ -25,6 +26,7 @@ db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
+app.use('/api/env', envRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);
@@ -37,7 +39,6 @@ app.get("/*", (_, res) => {
 
 app.listen(PORT, function(err){ 
   if (err) console.log("Error in server setup") 
-  console.log('url = ',process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT_SIGNUP)
   console.log("Server listening on Port", PORT); 
 })
 

@@ -19,7 +19,7 @@ const Body = () => {
     const [notfind, setNotfind] = useState(false)
 
     async function showArticles (credentials)  {
-        return ( await apiArticleMainShow(credentials)
+        return  apiArticleMainShow(credentials)
          .then(response=> {
             if (response.status === 201) {
                 return response.data
@@ -28,7 +28,7 @@ const Body = () => {
          })
          .catch((error) => {
             console.log('error: ' + error);
-         }) )
+         }) 
     }
 
     useEffect( ()=>{
