@@ -32,7 +32,9 @@ export default function Register() {
     const navigate = useNavigate();
     const formRef = useRef()
     let from = '/login';
-    const redirect_uri = env.redirect_signup
+    const redirect_uri = env?.redirect_signup
+    console.log(redirect_uri)
+    const clientID = env?.clientID
     
     
 
@@ -185,7 +187,7 @@ export default function Register() {
                 </div>
                 <div className='google-login'>
                     <Link 
-                        href={getGoogleUrl(from, redirect_uri)}
+                        href={getGoogleUrl(from, redirect_uri, clientID)}
                         sx={{
                         backgroundColor: '#f5f6f7',
                         borderRadius: 1,

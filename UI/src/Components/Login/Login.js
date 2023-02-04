@@ -36,6 +36,8 @@ export default function Login() {
     let from = ((location.state)?.from?.pathname) || '/';
 
     const redirect_uri = env?.redirect_login
+    console.log(redirect_uri)
+    const clientID = env?.clientID
 
 
     useEffect ( () => {
@@ -160,7 +162,7 @@ export default function Login() {
                 </div>
                 <div className='google-login'>
                     <Link 
-                        href={getGoogleUrl(from, redirect_uri)}
+                        href={getGoogleUrl(from, redirect_uri, clientID)}
                         sx={{
                         backgroundColor: '#f5f6f7',
                         borderRadius: 1,
