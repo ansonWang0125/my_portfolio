@@ -7,12 +7,10 @@ import { AtomicBlockUtils, EditorState } from "draft-js";
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import List from '@mui/material/List';
-import { apiGetImage } from '../../axios/api';
 
 
 export default function AddImage({editorState,onChange, setClicked}) {
     const [file, setFile] = useState();
-    const [image, setImage] = useState({ preview: '', data: ''})
     useEffect(() => {
         const insertImage = (editorState, url) => {
             const contentState = editorState.getCurrentContent();
@@ -35,37 +33,10 @@ export default function AddImage({editorState,onChange, setClicked}) {
         }
     }, [file, editorState, onChange, setClicked])
 
-    async function getImage (credentials)  {
-        return apiGetImage(credentials)
-         .then(response=> {
-            if (response.status === 201) {
-                return response.data
-            }
-            if (!response.ok) {throw new Error(response.status)}
-         })
-         .catch((error) => {
-            console.log('error: ' + error);
-         })
-    }
-
-    useEffect(()=>{
-        const fetchImage = async () => {
-            let formData = new FormData()
-            formData.append('file', image.data)
-            const response = await getImage(formData)
-            console.log('image',response)
-        }
-        fetchImage()
-    },[image])
 
     const handleChange = (event) => {
         console.log('url: ',URL.createObjectURL(event.target.files[0]))
         setFile(URL.createObjectURL(event.target.files[0]))
-        const img = {
-            preview: URL.createObjectURL(event.target.files[0]),
-            data: event.target.files[0],
-        }
-        setImage(img)
     }
     return (
         <List

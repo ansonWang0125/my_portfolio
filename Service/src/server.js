@@ -28,7 +28,6 @@ db.sequelize.sync().then(() => {    //drop table if exists
 })
 
 app.use('/api/env', envRoutes)
-app.use('api/image', imageRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);

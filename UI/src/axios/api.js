@@ -25,7 +25,8 @@ const articleRequest = axios.create({
   baseURL: 'https://post-articles.onrender.com/api/article',
 });
 
-export const apiGetImage = data => imageRequest.post('/upload', data);
+export const apiUploadImage = data => imageRequest.post('/upload', data);
+export const apiGetImage = data => imageRequest.post('/get', data);
 
 export const apiGetEnv = data => envRequest.post('/getenv', data);
 
