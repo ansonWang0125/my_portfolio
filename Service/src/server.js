@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 require('dotenv').config();
 const db = require('./Model')
 const envRoutes = require('./Routes/envRoutes')
-const imageRoutes = require('./Routes/imageRoutes')
 const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
