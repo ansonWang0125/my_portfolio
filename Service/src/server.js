@@ -37,6 +37,7 @@ app.get("/*", (_, res) => {
 
 app.listen(PORT, function(err){ 
   if (err) console.log("Error in server setup") 
+  console.log('url = ',process.env.REACT_APP_GOOGLE_OAUTH_REDIRECT_SIGNUP)
   console.log("Server listening on Port", PORT); 
 })
 
