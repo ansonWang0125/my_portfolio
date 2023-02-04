@@ -1,7 +1,5 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect } from 'react'
 import { apiGetEnv } from '../axios/api';
-
-
 
 
 async function getEnv () {
@@ -26,16 +24,17 @@ const EnvContext = React.createContext({
 
 const EnvContextProvider = (props) => {
     const [env, setEnv] = useState()
-
-    const fetchData = async () => {
-        const response = await getEnv();
-        if (response.success) {
-            console.log(response.data)
-            setEnv(response.data)
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getEnv();
+            if (response.success) {
+                setEnv(response.data)
+            }
         }
-    }
 
-    fetchData()
+        fetchData()
+    }, [])
 
     const changeEnv = (input) => {
         setEnv(input)
