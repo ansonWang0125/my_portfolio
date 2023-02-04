@@ -28,6 +28,7 @@ const EnvContextProvider = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getEnv();
+            console.log('what happend',response)
             if (response.success) {
                 setEnv(response.data)
             }

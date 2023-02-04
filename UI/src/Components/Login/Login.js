@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
 import { UseEnvContext } from '../../Context/envCnt';
-
+import { EnvContextProvider } from '../../Context/envCnt'; 
 
 
 export default function Login() {
@@ -35,7 +35,7 @@ export default function Login() {
     const location = useLocation();
     let from = ((location.state)?.from?.pathname) || '/';
 
-    const redirect_uri = env.redirect_login
+    const redirect_uri = env?.redirect_login
 
 
     useEffect ( () => {
@@ -107,6 +107,7 @@ export default function Login() {
         formRef.current.reportValidity();
     }
     return(
+        <EnvContextProvider>
         <Box 
             sx={{
             display: 'flex',
@@ -193,5 +194,6 @@ export default function Login() {
                 </div>
             </Paper>
         </Box>
+        </EnvContextProvider>
       )
 }

@@ -13,6 +13,7 @@ import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
 import { UseEnvContext } from '../../Context/envCnt';
+import { EnvContextProvider } from '../../Context/envCnt'; 
 
 
 
@@ -122,6 +123,7 @@ export default function Register() {
         formRef.current.reportValidity();
     }
     return(
+        <EnvContextProvider>
         <Box 
             sx={{
             display: 'flex',
@@ -217,5 +219,6 @@ export default function Register() {
                 </div>
             </Paper>
         </Box>
+        </EnvContextProvider>
       )
 }
