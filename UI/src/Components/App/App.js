@@ -13,6 +13,7 @@ import React from 'react';
 import Main from '../Main/Main';
 import Error from '../../Pages/Error/Error'
 import { ToastContainer} from 'react-toastify';
+import Image from "../../Pages/Image/Image";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/oauth/error' element={<Error />}/>
+          <Route path='/image/:id' element={<Image />}/>
         </Routes>
         </EnvContextProvider>
         </LoginContextProvider>

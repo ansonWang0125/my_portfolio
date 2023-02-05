@@ -1,12 +1,16 @@
-import "draft-js-inline-toolbar-plugin/lib/plugin.css";
-import { ItalicButton, BoldButton, UnderlineButton, } from "draft-js-buttons";
-import createInlineToolbarPlugin from "draft-js-inline-toolbar-plugin";
-import createLinkPlugin from "draft-js-anchor-plugin";
+import '@draft-js-plugins/inline-toolbar/lib/plugin.css';
+import '@draft-js-plugins/text-alignment/lib/plugin.css'
+import { ItalicButton, BoldButton, UnderlineButton, } from "@draft-js-plugins/buttons";
+import createInlineToolbarPlugin from '@draft-js-plugins/inline-toolbar';
+import createLinkPlugin from "@draft-js-plugins/anchor";
 import FontStyle from "./FontStyle";
 import editorStyles from './editorStyles.module.css';
+import createTextAlignmentPlugin from '@draft-js-plugins/text-alignment';
 
 export const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
+
+export const textAlignmentPlugin = createTextAlignmentPlugin();
 
 let themeStyles = {
     input: "input-here",
@@ -38,6 +42,7 @@ export default function toolbar() {
               <ItalicButton {...externalProps} />
               <UnderlineButton {...externalProps} />
               <linkPlugin.LinkButton {...externalProps} />
+              <textAlignmentPlugin.TextAlignment {...externalProps} />
               </div>
           )}
           </InlineToolbar>

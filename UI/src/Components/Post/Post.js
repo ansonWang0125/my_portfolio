@@ -44,6 +44,9 @@ const  Post = () =>{
             setEditorStateTitle(initialStateTitle)
             const initialStateContent = EditorState.createWithContent(convertFromRaw(response.articlesInform.content))
             setEditorStateContent(initialStateContent)
+            console.log('initialStateContent: ', response.articlesInform.content)
+            //console.log('img src = ', response.articlesInform.content.entityMap[0].data.src)
+            //setSrc(response.articlesInform.content.entityMap[0].data.src)
             const initialStateAuthor = EditorState.createWithContent(convertFromRaw(response.articlesInform.authorState))
             setEditorStateAuthor(initialStateAuthor)
             setTime(dayjs(response.articlesInform.time))
@@ -75,7 +78,7 @@ const  Post = () =>{
                     </span>
                 </div>
                 <div className='content'>
-                    <MyEditor placeholder={contentPlaceholder} editorState={editorStateContent} setEditorState={setEditorStateContent} readOnly={readOnly} allowAdd={true}/>
+                    <MyEditor placeholder={contentPlaceholder} editorState={editorStateContent} setEditorState={setEditorStateContent} readOnly={readOnly} allowAdd={true} articleID={articleID}/>
                 </div>
             </div>
             <div >

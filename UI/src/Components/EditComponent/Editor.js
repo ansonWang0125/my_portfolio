@@ -1,19 +1,34 @@
-import Editor, { composeDecorators } from "draft-js-plugins-editor";
+import Editor, { composeDecorators } from  '@draft-js-plugins/editor';
 // import RightClick from './RightClick'
 import { ContextMenu } from "./css/styles";
 import React, { useState, useEffect, useRef } from "react";
-import createImagePlugin from  'draft-js-image-plugin';
-import createResizeablePlugin from 'draft-js-resizeable-plugin';
+import createImagePlugin from '@draft-js-plugins/image';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
 import useStyleMap from '../styleMap/useStyleMap';
 import { makeStyles }from '@material-ui/styles';
 import AddImage from './AddImage'
 import { stateToHTML } from "draft-js-export-html";
 import { inlineToolbarPlugin } from './ToolBar.js';
+import { textAlignmentPlugin } from "./ToolBar.js";
 import {linkPlugin} from './ToolBar.js';
+import createAlignmentPlugin from '@draft-js-plugins/alignment';
+import createFocusPlugin from '@draft-js-plugins/focus';
+import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import '@draft-js-plugins/alignment/lib/plugin.css';
+
 
   const resizeablePlugin = createResizeablePlugin()
-  const decorator= composeDecorators(resizeablePlugin)
-  const imagePlugin = createImagePlugin(decorator);
+  const focusPlugin = createFocusPlugin();
+  const blockDndPlugin = createBlockDndPlugin();
+  const alignmentPlugin = createAlignmentPlugin();
+  const { AlignmentTool } = alignmentPlugin;
+
+  const decorator = composeDecorators(
+    resizeablePlugin.decorator,
+    alignmentPlugin.decorator,
+    focusPlugin.decorator,
+    blockDndPlugin.decorator
+  );
 
   const useStyles = makeStyles((theme)=>({
     draftEditorContainer: {
@@ -24,9 +39,21 @@ import {linkPlugin} from './ToolBar.js';
     },
     },}))
 
-    const plugins = [resizeablePlugin, imagePlugin, inlineToolbarPlugin, linkPlugin]
+    const imagePlugin = createImagePlugin({ decorator });
+
+
+    const plugins = [
+      resizeablePlugin, 
+      inlineToolbarPlugin, 
+      linkPlugin,
+      textAlignmentPlugin,
+      blockDndPlugin,
+      focusPlugin,
+      alignmentPlugin,
+      imagePlugin, 
+    ]
   
-  export default function MyEditor ({editorState, setEditorState, placeholder, readOnly, allowAdd}) {
+  export default function MyEditor ({editorState, setEditorState, placeholder, readOnly, allowAdd, articleID}) {
 
 
     const classes = useStyles()
@@ -113,6 +140,7 @@ import {linkPlugin} from './ToolBar.js';
               customStyleMap={customStyleMap}
               ref={editorRef}
             />
+            <AlignmentTool />
         </div>
         {clicked && allowAdd && (
           <ContextMenu top={points.y} left={points.x} ref={rightRef}>
@@ -121,7 +149,7 @@ import {linkPlugin} from './ToolBar.js';
               <li>Copy</li>
               <li>Delete</li>
             </ul> */}
-            <AddImage editorState={editorState} onChange={imageOnChange} setClicked={setClicked}/>
+            <AddImage editorState={editorState} onChange={imageOnChange} setClicked={setClicked} articleID={articleID}/>
           </ContextMenu>
         )}
         </>

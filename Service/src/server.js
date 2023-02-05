@@ -6,9 +6,10 @@ const envRoutes = require('./Routes/envRoutes')
 const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
+const imageRoutes = require('./Routes/imageRoutes')
 const path = require('path')
-const http = require('http')
-// const { setHeader } = require('./utils/setHeader')
+
+
 
 
 const PORT = process.env.PORT ||10000
@@ -27,6 +28,7 @@ db.sequelize.sync().then(() => {    //drop table if exists
 })
 
 app.use('/api/env', envRoutes)
+app.use('/api/image', imageRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);

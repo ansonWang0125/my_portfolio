@@ -228,7 +228,7 @@ const deleteArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+       ssl: true
     });
     try {
         const { deleteList } = req.body; 
