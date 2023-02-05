@@ -1,6 +1,7 @@
 {
     "short_name": "My Portfolio",
-    "name": "Create React App Sample",
+    "name": "My Portfolio",
+    "description": "This website records the knowledge I learned in Information Technology and Computer Science. ",
     "icons": [
       {
         "src": "favicon.ico",
