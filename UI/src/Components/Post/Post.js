@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import dayjs from 'dayjs';
 import './Post.css'
 import { apiArticlePost } from '../../axios/api';
+import ImageToolBar from '../EditComponent/ImageToolBar';
 
 const  Post = () =>{
 
@@ -65,6 +66,7 @@ const  Post = () =>{
         <div className="container">
             <div className='post'>
                 <ToolBar />
+                {readOnly ? <></>:<ImageToolBar />}
                 <div className='title'>
                     <MyEditor placeholder={titlePlaceholder} editorState={editorStateTitle} setEditorState={setEditorStateTitle} readOnly={readOnly} allowAdd={false}/>
                 </div>

@@ -11,17 +11,15 @@ import { stateToHTML } from "draft-js-export-html";
 import { inlineToolbarPlugin } from './ToolBar.js';
 import { textAlignmentPlugin } from "./ToolBar.js";
 import {linkPlugin} from './ToolBar.js';
-import createAlignmentPlugin from '@draft-js-plugins/alignment';
 import createFocusPlugin from '@draft-js-plugins/focus';
 import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import { alignmentPlugin } from './ImageToolBar';
 import '@draft-js-plugins/alignment/lib/plugin.css';
 
 
   const resizeablePlugin = createResizeablePlugin()
   const focusPlugin = createFocusPlugin();
   const blockDndPlugin = createBlockDndPlugin();
-  const alignmentPlugin = createAlignmentPlugin();
-  const { AlignmentTool } = alignmentPlugin;
 
   const decorator = composeDecorators(
     resizeablePlugin.decorator,
@@ -140,7 +138,6 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
               customStyleMap={customStyleMap}
               ref={editorRef}
             />
-            <AlignmentTool />
         </div>
         {clicked && allowAdd && (
           <ContextMenu top={points.y} left={points.x} ref={rightRef}>
