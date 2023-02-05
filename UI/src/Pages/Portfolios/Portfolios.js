@@ -3,15 +3,16 @@ import { UseTitleContext } from '../../Context/TitleContextProvider';
 import Post from '../../Components/Post/Post'
 import SearchPage from "./SearchPage/SearchPage"
 import { Route, Routes } from "react-router-dom";
-import './other.css'
+import './Portfolios.css'
 
-const Others = () => {
+
+const Portfolios = () => {
     const {changeTitle} = UseTitleContext();
     useEffect(() => {
-        changeTitle('Others Articles');
+        changeTitle('Portfolios');
     }, [changeTitle])
     return (
-        <div className="Others">
+        <div className="Portfolios">
             <Routes>
                 <Route path="/" element={<SearchPage/>} />
                 <Route path="/:id" element={<Post /> } />
@@ -20,4 +21,4 @@ const Others = () => {
     );
 }
 
-export default Others;
+export default Portfolios;

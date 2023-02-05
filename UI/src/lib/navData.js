@@ -23,15 +23,15 @@ export const navData = [
     {
         id: 2,
         icon: <WorkIcon/>,
-        text: "Work",
-        link: "Work_Articles",
+        text: "Portfolios",
+        link: "Portfolios",
         needLogin: false
     },
     {
         id: 3,
         icon: <SettingsIcon/>,
-        text: "Other Articles",
-        link: "Other_Articles",
+        text: "Technical Articles",
+        link: "Technical_Articles",
         needLogin:false
     },
     {

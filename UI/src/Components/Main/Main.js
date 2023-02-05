@@ -2,8 +2,8 @@ import Icon from '../Menu/icon/icon';
 import Item from '../Menu/item/item';
 import Mainblog from '../../Pages/main/mainblog';
 import Article from '../../Pages/Article/Article'
-import Work from '../../Pages/Work/Work';
-import Others from '../../Pages/Others/Others';
+import Portfolios from '../../Pages/Portfolios/Portfolios';
+import Technical from '../../Pages/Technical/Technical';
 import Create from '../../Pages/Create/create';
 import MyArticles from '../../Pages/My_articles/MyArticle';
 import MyAccount from '../../Pages/My_Accounts/MyAccount';
@@ -23,8 +23,8 @@ const Main = () => {
             <Routes>
               <Route path='/*' element={<Mainblog />}/>
               <Route path='Website_Articles/*' element={<Article />}/>
-              <Route path='Work_Articles/*' element={<Work />}/>
-              <Route path='Other_Articles/*' element={<Others />}/>
+              <Route path='Portfolios/*' element={<Portfolios/>}/>
+              <Route path='Technical_Articles/*' element={<Technical />}/>
               <Route 
                 path="Create" 
                 element={

@@ -20,7 +20,7 @@ import IconButton from '@mui/material/IconButton';
 
 
 export default function SearchPage  ()  {
-    const category = 'Other'
+    const category = 'Portfolios'
     const [notfind, setNotfind] = useState(false)
     const [searchStr, setSearchStr] = useState('');
     const [articles, setArticles] = useState([])
@@ -138,7 +138,7 @@ export default function SearchPage  ()  {
                             <div key={article.id}>
                                 <ListItem alignItems="flex-start" >
                                     <ListItemText
-                                        primary= { <NavLink to={`/Other_Articles/id=${article.id}`} 
+                                        primary= { <NavLink to={`/Portfolios_Articles/id=${article.id}`} 
                                                             className='listitem'
                                                             state={{id:article.id, readOnly:true}}>
                                                     {article.title}</NavLink> }

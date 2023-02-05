@@ -132,8 +132,8 @@ const CreateArticle = () =>{
                             <em>None</em>
                         </MenuItem>
                         <MenuItem value={'Website'}>Website</MenuItem>
-                        <MenuItem value={'Work'}>Work</MenuItem>
-                        <MenuItem value={'Other'}>Other</MenuItem>
+                        <MenuItem value={'Portfolios'}>Portfolios</MenuItem>
+                        <MenuItem value={'Technical'}>Technical</MenuItem>
                     </Select>
                 </div>
                 <div className="inputitem">
