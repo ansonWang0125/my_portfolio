@@ -228,7 +228,7 @@ const deleteArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-       ssl: true
+        ssl: true
     });
     try {
         const { deleteList } = req.body; 
@@ -238,7 +238,9 @@ const deleteArticle = async (req, res) => {
         const valid = deleteList.every(val => allArticles.includes(val));
         if (valid){
             const query = `DELETE FROM "Articles" WHERE "id" IN (${deleteList})`
-            const r = await client.query(query)
+            const deleteImage = `DELETE FROM "Images" WHERE "articleID" IN (${deleteList})`
+            await client.query(deleteImage)
+            await client.query(query)
             return res.status(201).send({success:true});
         } else{
             return res.status(201).send({success:false,message:'Have Unvalid Article ID'});

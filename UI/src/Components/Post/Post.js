@@ -37,7 +37,7 @@ const  Post = () =>{
     }
     useEffect( ()=>{
         const fetchData = async () => {
-            console.log('post id',articleID)
+            // console.log('post id',articleID)
             const response = await postArticles({id:articleID});
             // const authorTag = 'Auhtor: ';
             // response.articlesInform.authorState.blocks[0].text = authorTag.concat(response.articlesInform.authorState.blocks[0].text)
@@ -45,7 +45,7 @@ const  Post = () =>{
             setEditorStateTitle(initialStateTitle)
             const initialStateContent = EditorState.createWithContent(convertFromRaw(response.articlesInform.content))
             setEditorStateContent(initialStateContent)
-            console.log('initialStateContent: ', response.articlesInform.content)
+            // console.log('initialStateContent: ', response.articlesInform.content)
             //console.log('img src = ', response.articlesInform.content.entityMap[0].data.src)
             //setSrc(response.articlesInform.content.entityMap[0].data.src)
             const initialStateAuthor = EditorState.createWithContent(convertFromRaw(response.articlesInform.authorState))

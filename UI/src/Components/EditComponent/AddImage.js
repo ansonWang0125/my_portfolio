@@ -73,10 +73,10 @@ export default function AddImage({editorState,onChange, setClicked, articleID}) 
                 console.log(response.message)
             }
             if (response.id !== -1){
-                console.log(response.id)
+                // console.log(response.id)
                 const getResponse = await getImage(response.id)
                 if (getResponse.success) {
-                    console.log('data = ', getResponse.image)
+                    // console.log('data = ', getResponse.image)
                     let ImageBase64 = Buffer.from(getResponse.image, 'binary').toString('base64')
                     setSrcValue("data:image/png;base64,"+ImageBase64)
                 } else{
