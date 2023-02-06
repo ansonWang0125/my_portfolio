@@ -131,7 +131,7 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
       <>
       <div
         className={classes.draftEditorContainer}
-        onTab={handleKeyBindings}
+        //onTab={handleKeyBindings}
         onClick={handleClick}
         onContextMenu={(e) => {
           e.preventDefault();

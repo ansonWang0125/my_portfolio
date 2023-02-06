@@ -78,7 +78,7 @@ const Body = () => {
                                     <div key={article.id}>
                                         <ListItem alignItems="flex-start" >
                                             <ListItemText
-                                                primary = { <NavLink to={`/${article.category}/${article.id}`} 
+                                                primary = { <NavLink to={`/${article.category}_Articles/${article.id}`} 
                                                             className='listitem'
                                                             state={{id:article.id, readOnly:true}}>
                                                     {article.searchTimes}<br/>瀏覽</NavLink> }
@@ -86,7 +86,7 @@ const Body = () => {
                                             />
                                             <ListItemText
                                                 id='article-data'
-                                                primary= { <NavLink to={`/${article.category}/id=${article.id}`} 
+                                                primary= { <NavLink to={`/${article.category}_Articles/id=${article.id}`} 
                                                                     className='listitem'
                                                                     state={{id:article.id, readOnly:true}}>
                                                             {article.title}</NavLink> }
