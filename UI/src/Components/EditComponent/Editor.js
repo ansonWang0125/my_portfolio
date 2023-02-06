@@ -1,5 +1,5 @@
 import Editor, { composeDecorators } from  '@draft-js-plugins/editor';
-import { RichUtils, getDefaultKeyBinding } from 'draft-js'
+import { EditorState, getDefaultKeyBinding, Modifier } from 'draft-js'
 // import RightClick from './RightClick'
 import { ContextMenu } from "./css/styles";
 import React, { useState, useEffect, useRef } from "react";
@@ -85,11 +85,18 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
     const onChange = editorState => setEditorState( editorState );
 
     const handleKeyBindings = e => {
+      console.log('click')
       if (e.keyCode === 9) {
-        const newEditorState = RichUtils.onTab(e, editorState, 6 /* maxDepth */)
-        if (newEditorState !== editorState) {
-           onChange(newEditorState)
-        }
+        e.preventDefault()
+        let currentState = editorState;
+        let newContentState = Modifier.replaceText(
+          currentState.getCurrentContent(),
+          currentState.getSelection(),
+          '     '
+        );
+        console.log('onChange')
+        // onChange(newEditorState)
+        onChange(EditorState.push(currentState, newContentState, '      '))
     
         return
       }
@@ -131,7 +138,7 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
       <>
       <div
         className={classes.draftEditorContainer}
-        //onTab={handleKeyBindings}
+        onKeyDown={handleKeyBindings}
         onClick={handleClick}
         onContextMenu={(e) => {
           e.preventDefault();
@@ -145,6 +152,7 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
       >
             <Editor
               style={{float:'none'}}
+              onTab={handleKeyBindings}
               readOnly={readOnly}
               editorState={editorState}
               onChange={onChange}
