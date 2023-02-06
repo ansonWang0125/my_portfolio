@@ -135,7 +135,7 @@ export default function SearchPage  ()  {
                             <div key={article.id}>
                                 <ListItem alignItems="flex-start" >
                                     <ListItemText
-                                        primary= { <NavLink to={`/Website_Articles/id=${article.id}`} 
+                                        primary= { <NavLink to={`/${article.category}/id=${article.id}`} 
                                                             className='listitem'
                                                             state={{id:article.id, readOnly:true}}>
                                                     {article.title}</NavLink> }

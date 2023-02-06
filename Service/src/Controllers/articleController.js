@@ -87,7 +87,7 @@ const postArticle = async (req, res) => {
 
 
 const showArticle = async (req, res) => {
-    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 `
+    const query = `SELECT "Articles"."id", "title", "author", "time", "category", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 `
     const client = new Client({
         host: process.env.host,
         user: process.env.user,
@@ -114,8 +114,8 @@ const showArticle = async (req, res) => {
 }
 
 const mainShowArticle = async (req, res) => {
-    const newQuery = `SELECT "Articles"."id", "title", "author", "time", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "createTime" DESC; `
-    const hotQuery = `SELECT "Articles"."id", "title", "author", "time", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "searchTimes" DESC; `
+    const newQuery = `SELECT "Articles"."id", "title", "author", "time", "category", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "createTime" DESC; `
+    const hotQuery = `SELECT "Articles"."id", "title", "author", "time", "category", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ORDER BY "searchTimes" DESC; `
     const client = new Client({
         host: process.env.host,
         user: process.env.user,
@@ -142,7 +142,7 @@ const mainShowArticle = async (req, res) => {
 }
 
 const searchArticle = async (req, res) => {
-    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 AND "title" LIKE $2 `
+    const query = `SELECT "Articles"."id", "title", "author", "time", "category", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "category" = $1 AND "title" LIKE $2 `
     const client = new Client({
         host: process.env.host,
         user: process.env.user,
@@ -169,7 +169,7 @@ const searchArticle = async (req, res) => {
 }
 
 const myShowArticle = async (req, res) => {
-    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 `
+    const query = `SELECT "Articles"."id", "title", "author", "time", "category", "Users"."authorName" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 `
     const client = new Client({
         host: process.env.host,
         user: process.env.user,
@@ -195,7 +195,7 @@ const myShowArticle = async (req, res) => {
 }
 
 const mySearchArticle = async (req, res) => {
-    const query = `SELECT "Articles"."id", "title", "author", "time", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 AND "title" LIKE $2 `
+    const query = `SELECT "Articles"."id", "title", "author", "time", "category", "Users"."authorName" from "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" WHERE "Users"."id" = $1 AND "title" LIKE $2 `
     const client = new Client({
         host: process.env.host,
         user: process.env.user,

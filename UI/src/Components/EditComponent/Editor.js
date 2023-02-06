@@ -1,4 +1,5 @@
 import Editor, { composeDecorators } from  '@draft-js-plugins/editor';
+import { RichUtils, getDefaultKeyBinding } from 'draft-js'
 // import RightClick from './RightClick'
 import { ContextMenu } from "./css/styles";
 import React, { useState, useEffect, useRef } from "react";
@@ -83,6 +84,19 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
   
     const onChange = editorState => setEditorState( editorState );
 
+    const handleKeyBindings = e => {
+      if (e.keyCode === 9) {
+        const newEditorState = RichUtils.onTab(e, editorState, 6 /* maxDepth */)
+        if (newEditorState !== editorState) {
+           onChange(newEditorState)
+        }
+    
+        return
+      }
+    
+      return getDefaultKeyBinding(e)
+    }
+
     const imageOnChange = (editorState) => {
       let options = {
           entityStyleFn: (entity)=> {
@@ -117,6 +131,7 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
       <>
       <div
         className={classes.draftEditorContainer}
+        onTab={handleKeyBindings}
         onClick={handleClick}
         onContextMenu={(e) => {
           e.preventDefault();
