@@ -33,7 +33,6 @@ export default function Register() {
     const formRef = useRef()
     let from = '/login';
     const redirect_uri = env?.redirect_signup
-    console.log(redirect_uri)
     const clientID = env?.clientID
     
     

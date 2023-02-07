@@ -21,8 +21,8 @@ console.log(process.env.dbport)
     db.users = require('./userModel') (sequelize, DataTypes)
     db.article = require('./articleModel') (sequelize, DataTypes)
     db.image = require('./imageModel') (sequelize, DataTypes)
-    db.users.hasMany(db.article, {foreignKey: "userID", targetKey: "id"})
-    db.article.hasMany(db.image, {foreignKey: "articleID", targetKey: "id"})
+    db.users.hasMany(db.article, {foreignKey: "userID", targetKey: "id", onDelete: 'cascade'})
+    db.article.hasMany(db.image, {foreignKey: "articleID", targetKey: "id", onDelete: 'cascade'})
 
 //exporting the module
 module.exports = db 

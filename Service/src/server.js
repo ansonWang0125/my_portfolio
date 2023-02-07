@@ -7,6 +7,7 @@ const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
 const sessionRouter = require('./Routes/session.routes');
 const imageRoutes = require('./Routes/imageRoutes')
+const dataRoutes = require('./Routes/dataRoutes')
 const path = require('path')
 
 
@@ -23,7 +24,7 @@ app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-db.sequelize.sync().then(() => {    //drop table if exists
+db.sequelize.sync({force:true}).then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
@@ -32,6 +33,7 @@ app.use('/api/image', imageRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/sessions', sessionRouter);
+app.use('/api/data', dataRoutes);
 
 
 app.use(express.static(path.join(__dirname, "..", "..", "UI", "build")));

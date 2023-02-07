@@ -238,8 +238,6 @@ const deleteArticle = async (req, res) => {
         const valid = deleteList.every(val => allArticles.includes(val));
         if (valid){
             const query = `DELETE FROM "Articles" WHERE "id" IN (${deleteList})`
-            const deleteImage = `DELETE FROM "Images" WHERE "articleID" IN (${deleteList})`
-            await client.query(deleteImage)
             await client.query(query)
             return res.status(201).send({success:true});
         } else{

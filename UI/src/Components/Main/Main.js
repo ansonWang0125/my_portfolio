@@ -9,6 +9,9 @@ import MyArticles from '../../Pages/My_articles/MyArticle';
 import MyAccount from '../../Pages/My_Accounts/MyAccount';
 import Profile from '../../Pages/Profile/MyProfile';
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
+import ProtectedRoot from '../ProtectedRoutes/ProtectedRoot';
+import DataManagement from '../../Pages/DataManagement/DataManagement';
+import Image from "../../Pages/Image/Image";
 import {
     Routes,
     Route,
@@ -49,7 +52,20 @@ const Main = () => {
                   <ProtectedRoutes>
                     <MyAccount/>
                   </ProtectedRoutes>}/>
+              <Route 
+                path="Data_Management/*"  
+                element={
+                  <ProtectedRoot>
+                    <DataManagement/>
+                  </ProtectedRoot>}/>
+              <Route 
+                path="Image/:d"  
+                element={
+                  <ProtectedRoot>
+                    <Image/>
+                  </ProtectedRoot>}/>
             </Routes>
+            
           </main>
     );
 }

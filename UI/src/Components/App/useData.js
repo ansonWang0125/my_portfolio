@@ -7,7 +7,8 @@ export default function useData() {
             authorName:'',
             email:'',
             password:'',
-            token:''
+            token:'',
+            root:false
         }
         if (localStorage.getItem('user') !== 'undefined' && localStorage.getItem('user') !== null ){
             const dataString = localStorage.getItem('user');

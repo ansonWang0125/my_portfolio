@@ -29,6 +29,11 @@ const articleRequest = axios.create({
   // baseURL: 'http://localhost:8080/api/article',
 });
 
+const dataRequest = axios.create({
+  baseURL: 'https://post-articles.onrender.com/api/data',
+  // baseURL: 'http://localhost:8080/api/data',
+});
+
 export const apiUploadImage = data => imageRequest.post('/upload', data);
 export const apiGetImage = id => imageRequest.get('/get/'+id);
 
@@ -48,3 +53,6 @@ export const apiArticleMainShow = data => articleRequest.post('/mainShow', data)
 export const apiArticleMyShow = data => articleRequest.post('/myShow', data);
 export const apiArticleMySearch = data => articleRequest.post('/mySearch', data);
 export const apiArticleDelete = data => articleRequest.post('/delete', data);
+
+export const apiDataShow = data => dataRequest.post('/show', data);
+export const apiDataDelete = data => dataRequest.post('/delete', data);

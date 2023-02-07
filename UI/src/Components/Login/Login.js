@@ -16,6 +16,7 @@ import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
 import { getGoogleUrl } from '../../utils/getGoogleUrl';
 import { UseEnvContext } from '../../Context/envCnt';
 import { EnvContextProvider } from '../../Context/envCnt'; 
+import { UseRootContext } from '../../Context/RootCnt';
 
 
 export default function Login() {
@@ -28,6 +29,7 @@ export default function Login() {
     // const [error, setError] = useState(false);
     const {setData} = useData();
     const {changeLogin} = UseLoginContext();
+    const {changeRoot} = UseRootContext();
     const navigate = useNavigate();
     const {env} = UseEnvContext();
     const formRef = useRef()
@@ -36,7 +38,6 @@ export default function Login() {
     let from = ((location.state)?.from?.pathname) || '/';
 
     const redirect_uri = env?.redirect_login
-    console.log(redirect_uri)
     const clientID = env?.clientID
 
 
@@ -59,7 +60,7 @@ export default function Login() {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-warning'
             })}
-    }, [notfound, success, passworderror, click, navigate,changeLogin])
+    }, [notfound, success, passworderror, click, navigate,changeLogin, changeRoot])
 
     async function loginUser(credentials) {
         return apiUserLogin(credentials)
@@ -100,9 +101,13 @@ export default function Login() {
             password
         });
         if (response.success){
-            setData({token: response.token})
+            setData({token: response.token});
+            setData({token: response.token, root: response.root})
+            changeLogin(true)
         }
-        changeLogin(true)
+        console.log('isRoot', response.root)
+        changeRoot(response.root)
+        
         setClick(!click)
     }
     const handleBtnClick = () => {

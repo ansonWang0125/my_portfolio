@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import { apiGetImage } from '../../axios/api';
 import { Buffer } from 'buffer';
+import { useLocation } from 'react-router-dom';
+import './Image.css'
 
 const Image = () => {
 
     const [srcValue, setSrcValue] = useState()
+    const location = useLocation()
+    const originalname = (location.state !== null ? location.state.originalname : 'undefined');
     const href = window.location.href
+    console.log(href)
     const id = href.substring(href.lastIndexOf('/')+1)
     console.log(id)
 
@@ -37,7 +42,10 @@ const Image = () => {
     },[id])
 
     return (
-        <img src={srcValue} alt=""/>
+        <div id='image'>
+            <img src={srcValue} alt={originalname}/>
+            <h5>{originalname}</h5>
+        </div>
     )
 }
 
