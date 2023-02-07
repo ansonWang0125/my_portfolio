@@ -9,6 +9,8 @@ import './css/nav.css';
 const Item = () => {
     const {login} = UseLoginContext();
     const {root} = UseRootContext();
+    console.log(login)
+    console.log(root)
     
     return (
         <div id='navbarToggleExternalContent' >

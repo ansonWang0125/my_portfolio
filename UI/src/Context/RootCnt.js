@@ -8,7 +8,8 @@ const RootContext = React.createContext({
 
 
 const RootContextProvider = (props) => {
-    const [root, setRoot] = useState(localStorage.getItem('user') !== null || undefined ?localStorage.getItem('user').root:false)
+    const isRoot = localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')).root:false
+    const [root, setRoot] = useState(isRoot)
     const changeRoot = (input) => {
         setRoot(input)
     }
