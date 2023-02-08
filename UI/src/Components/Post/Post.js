@@ -76,7 +76,7 @@ const  Post = () =>{
                         <MyEditor placeholder={authorPlaceholder} editorState={editorStateAuthor} setEditorState={setEditorStateAuthor} readOnly={readOnly} allowAdd={false}/>
                     </span>
                     <span className='time'>
-                        {readOnly ? <div className='datestring'>Edit Time: {time.format('DD/MM/YYYY') }</div> : <DataPicker setTime={setTime} time={time}/> }
+                        {readOnly ? <div className='datestring'>Edit Time: {time.format('YYYY/MM/DD') }</div> : <DataPicker setTime={setTime} time={time}/> }
                     </span>
                 </div>
                 <div className='content'>
