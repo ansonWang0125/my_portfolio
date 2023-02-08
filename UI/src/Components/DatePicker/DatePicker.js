@@ -13,7 +13,7 @@ export default function DataPicker ({setTime, time}) {
                 <DesktopDatePicker
                     required
                     label="Date desktop"
-                    inputFormat="MM/DD/YYYY"
+                    inputFormat="YYYY/MM/DD"
                     value={time}
                     onChange={handleChange}
                     renderInput={(params) => <TextField size="small" {...params} />}

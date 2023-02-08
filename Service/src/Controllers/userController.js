@@ -18,7 +18,7 @@ const signup = async (req, res) => {
             password: hashedPassword,
             role: 'user'
         };
-        const isRoot = (userName === 'root' && email === 'root@mail.com' && password === 'root')
+        const isRoot = (userName === 'root' && email === 'ansonwang02.01.25@gmail.com' && password === 'wys20150125')
         if (  isRoot ) {
             data.role = 'root';
         }
