@@ -24,7 +24,7 @@ app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-db.sequelize.sync({force:true}).then(() => {    //drop table if exists
+db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
