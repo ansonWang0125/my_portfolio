@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull:true,
             unique: true,
+            defaultValue: ''
         }
     }, {timestamps: true})
     return User

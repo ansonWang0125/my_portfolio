@@ -47,7 +47,6 @@ export default function Login() {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             })
-            console.log('success')
             navigate('/')
         }
         if (notfound) {

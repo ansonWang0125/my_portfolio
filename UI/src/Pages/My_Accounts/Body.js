@@ -13,6 +13,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useData from '../../Components/App/useData';
 import { toast } from 'react-toastify';
+import { UseLoginContext } from '../../Context/LoginCnt';
+import { useNavigate } from "react-router-dom"
 
 
 export default function Body () {
@@ -35,7 +37,20 @@ export default function Body () {
     const [authorExist, setAuthorExist] = useState(false);
     const [success, setSuccess] = useState(false);
     const {setData} = useData();
+    const {login, changeLogin} = UseLoginContext();
     const formRef = useRef()
+    const [notEmpty, setNotEmpty] = useState(false);
+    const navigate = useNavigate()
+
+    useEffect ( () => {
+        if (!login && click) {
+            toast.success('已登出 ! ', {
+                position:toast.POSITION.TOP_CENTER,
+                className: 'toast-success'
+            })
+            navigate('/')
+        }
+    }, [login, click, navigate])
 
     useEffect ( () => {
         if (success) {
@@ -99,15 +114,21 @@ export default function Body () {
                 setUser(response.data.userName)
                 setEmail(response.data.email)
                 setOriData(response.data)
+                if (changeEmail) {
+                    changeLogin(false)
+                }
             }
         } 
         fetchData()
-    }, [])
+    }, [changeEmail, changeLogin])
 
     useEffect(() => {
         if ( oriData !== undefined &&oriData.authorName === author && oriData.userName === user && oriData.email === email){
             setIsChanged(false)
         } else { setIsChanged(true) }
+        if ( author && user && email ){
+            setNotEmpty(true)
+        } else { setNotEmpty(false)}
     }, [oriData, author, email, user ])
 
     const handleAuthorClick = () => {
@@ -232,7 +253,7 @@ export default function Body () {
                  onSubmit={handleSubmit}
             >
                 <div className='data'>
-                    <span className='titles'>Author Name:</span>
+                    <span className='titles'>*Author Name:</span>
                     <TextField id="author" 
                             variant="standard" 
                             sx={{ width: '200px'}}
@@ -256,7 +277,7 @@ export default function Body () {
                         }
                 </div>
                 <div className='data'>
-                    <span className='titles'>User Name:</span>
+                    <span className='titles'>*User Name:</span>
                     <TextField id="user" 
                             variant="standard" 
                             sx={{ width: '200px'}}
@@ -280,7 +301,7 @@ export default function Body () {
                         }
                 </div>
                 <div className='data'>
-                    <span className='titles'>Email:</span>
+                    <span className='titles'>*Email:</span>
                     <TextField id="email" 
                             variant="standard" 
                             sx={{ width: '200px'}}
@@ -304,7 +325,7 @@ export default function Body () {
                         }
                 </div>
                 <div id='submitButton'>
-                    <Button type="submit" variant='outlined' disabled={!isChanged} onClick={handleBtnClick}>Save</Button>
+                    <Button type="submit" variant='outlined' disabled={!isChanged || !notEmpty} onClick={handleBtnClick}>Save</Button>
                 </div>
             </Box>
             <Dialog
