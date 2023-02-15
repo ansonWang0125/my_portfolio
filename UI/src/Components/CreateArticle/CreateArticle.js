@@ -62,8 +62,6 @@ const CreateArticle = () =>{
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (valid){
-            console.log('success')
-            console.log('Author: ', author)
             const response = await createArticle({
                 category,
                 title,
@@ -71,13 +69,10 @@ const CreateArticle = () =>{
                 time,
                 content
             });
-
-            console.log(response);
             if (response.success) {
                 setHasCreate(false)
                 setIncorrect(false)
                 setSuccess(true)
-                console.log('create id',response.articleInform.id)
                 navigate(`/${category}_Articles/id=${response.articleInform.id}`,{state : {id:response.articleInform.id, readOnly:false}})
             }else if ( !response.success){
                 if ( response.message === "Something went wrong") {

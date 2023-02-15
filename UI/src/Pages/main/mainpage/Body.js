@@ -34,7 +34,6 @@ const Body = () => {
     useEffect( ()=>{
         const fetchData = async () => {
             const response = await showArticles({value});
-            console.log(response)
             if (response.success) {
                 setArticles(response.articlesInform)
                 setNotfind(false)

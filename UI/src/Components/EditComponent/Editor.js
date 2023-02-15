@@ -85,7 +85,6 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
     const onChange = editorState => setEditorState( editorState );
 
     const handleKeyBindings = e => {
-      console.log('click')
       if (e.keyCode === 9) {
         e.preventDefault()
         let currentState = editorState;
@@ -94,8 +93,6 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
           currentState.getSelection(),
           '     '
         );
-        console.log('onChange')
-        // onChange(newEditorState)
         onChange(EditorState.push(currentState, newContentState, '      '))
     
         return
@@ -147,7 +144,6 @@ import '@draft-js-plugins/alignment/lib/plugin.css';
             x: e.pageX,
             y: e.pageY,
           });
-          console.log("Right Click", e.pageX, e.pageY);
         }}
       >
             <Editor
