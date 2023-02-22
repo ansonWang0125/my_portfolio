@@ -181,7 +181,7 @@ export default function Register() {
                             type="submit"
                             onClick={handleBtnClick}
                     >
-                        Sing up
+                        Sign up
                     </Button>
                 </div>
                 <div className='google-login'>
