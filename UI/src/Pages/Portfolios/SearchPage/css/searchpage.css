@@ -67,3 +67,8 @@
     font-size: 20px;
     font-family: Monospace;
 }
+
+#sensor {
+    width:10px;
+    height: 10px;
+}

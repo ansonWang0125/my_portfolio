@@ -1,4 +1,4 @@
-import  React, { useState, useEffect, useRef } from "react";
+import  React, { useState, useEffect, useRef, useCallback } from "react";
 import { NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -26,6 +26,14 @@ export default function SearchPage  ()  {
     const [articles, setArticles] = useState([])
     const {ref, isComponentVisible} = useComponentVisible(false)
     const searchRef = useRef(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
+    const loader = useRef(null);
+    const [nomore, setNomore] = useState(false);
+    const [refresh, setRefresh] = useState(false);
+    const [refreshCount, setRefreshCount] = useState(0);
+    const [searching, setSearching] = useState('');
+
     async function showArticles (credentials)  {
         return apiArticleShow(credentials)
          .then(response=> {
@@ -50,28 +58,97 @@ export default function SearchPage  ()  {
             console.log('error: ' + error);
          })
     }
+    const handleObserver = useCallback((entries) => {
+        const target = entries[0];
+        if (target.isIntersecting) {
+            setRefreshCount((prev)=>prev+1)
+            setRefresh(true);
+        }
+      }, []);
+    
+    const refreshData = useCallback(async () => {
+        try{
+            setLoading(true)
+            const dataNum = articles.length
+            const response = await searchArticles({category:category,searchStr:searching,dataNum});
+            if (articles && !nomore) {
+                var addData = response.articlesInform
+                if ( response.articlesInform === undefined) {
+                    addData = []
+                }else if (response.articlesInform.length < 15){
+                    setNomore(true)
+                }
+                const newData = articles.concat(addData)
+                setArticles(newData)
+                setNotfind(false)
+                setLoading(false)
+            } else if (nomore) {
+                setLoading(false)
+            }
+            else{
+                setNotfind(true)
+                setLoading(false)
+            }
+        } catch (err) {
+            setError(true)
+            console.log(err)
+        }
+    },[articles, nomore, searching])
+
+    useEffect ( ()=>{
+        if (!nomore && refresh && refreshCount > 1){
+            refreshData()
+        }
+    }, [ refreshData, refresh, nomore, articles.length, refreshCount ])
+
+
+    useEffect(() => {
+        const option = {
+            root: null,
+            rootMargin: "20px",
+            threshold: 0
+          };
+        const observer = new IntersectionObserver(handleObserver, option);
+        if (loader.current) {
+            observer.observe(loader.current);
+        }
+    }, [handleObserver])
+
     useEffect( ()=>{
         const fetchData = async () => {
             const response = await showArticles({category});
             if (response.success) {
                 setArticles(response.articlesInform)
                 setNotfind(false)
-            }else{
+                if (response.articlesInform.length < 15 && !refresh ){
+                    setNomore(true)
+                    setLoading(false)
+                }
+            }else if (!refresh){
                 setNotfind(true)
+                setNomore(true)
+                setLoading(false)
             }
         }
         fetchData()
         setSearchStr('')
-    },[])
+    },[refresh])
     const handleSearch = async (e) => {
         e.preventDefault()
+        setSearching(searchStr)
         if (searchStr){
-            const response = await searchArticles({category:category,searchStr: searchStr})
-            if (response.success) {
+            const response = await searchArticles({searchStr: searchStr})
+            if (response.success && !refresh) {
                 setArticles(response.articlesInform)
                 setNotfind(false)
-            }else{
+                if (response.articlesInform.length < 15 ){
+                    setNomore(true)
+                    setLoading(false)
+                }
+            }else if (!refresh){
                 setNotfind(true)
+                setNomore(true)
+                setLoading(false)
             }
         }
     }
@@ -161,6 +238,9 @@ export default function SearchPage  ()  {
                 </List>)}
             </div>
             </Box>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error!</p>}
+            <div ref={loader} id='sensor'/>
         </div>
         </div>
     )
