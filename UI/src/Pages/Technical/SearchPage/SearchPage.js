@@ -137,15 +137,15 @@ export default function SearchPage  ()  {
         e.preventDefault()
         setSearching(searchStr)
         if (searchStr){
-            const response = await searchArticles({searchStr: searchStr})
-            if (response.success && !refresh) {
+            const response = await searchArticles({category,searchStr: searchStr})
+            if (response.success) {
                 setArticles(response.articlesInform)
                 setNotfind(false)
                 if (response.articlesInform.length < 15 ){
                     setNomore(true)
                     setLoading(false)
                 }
-            }else if (!refresh){
+            }else {
                 setNotfind(true)
                 setNomore(true)
                 setLoading(false)
