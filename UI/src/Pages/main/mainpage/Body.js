@@ -114,6 +114,7 @@ const Body = () => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setRefresh(false)
     };
 
     return (
