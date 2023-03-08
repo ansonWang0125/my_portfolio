@@ -1,14 +1,20 @@
 version: '3'
 services:
     postgres:
+        container_name: myPort-postgres
         image: postgres:12.1
         ports:
             - "5432:5432"
         environment:
+            POSTGRES_USER: postgres
             POSTGRES_PASSWORD: 12341234
+            POSTGRES_DB: my_portfolio
         volumes:
             - ./postgresql/data:/var/lib/postgresql/data
     service:
+        container_name: myPort-service
+        env_file:
+            - /service/.env
         build:
             context: ./service
             dockerfile: Dockerfile.dev
@@ -19,11 +25,16 @@ services:
             - ./service/test:/app/test
         ports:
             - "8080:8080"
+        depends_on:
+            - postgres
             
     ui:
+        container_name: myPort-ui
         build:
             context: ./ui
             dockerfile: Dockerfile.dev
+        env_file:
+            - /ui/.env
         volumes:
             - /app/node_modules
             - ./ui:/app
