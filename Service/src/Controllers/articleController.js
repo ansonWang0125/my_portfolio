@@ -10,7 +10,7 @@ const saveArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     const query = `UPDATE "Articles" SET "titleState" = $1, "authorState" = $2, "time" = $3, "content" = $4, "title" = $5, "author" = $6 WHERE "id" = $7`
     try {
@@ -69,7 +69,7 @@ const postArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { id } = req.body; 
@@ -94,7 +94,7 @@ const showArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { category, dataNum } = req.body; 
@@ -122,7 +122,7 @@ const mainShowArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { value, dataNum } = req.body; 
@@ -149,7 +149,7 @@ const searchArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { category, searchStr, dataNum } = req.body; 
@@ -176,7 +176,7 @@ const myShowArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         await client.connect();
@@ -202,7 +202,7 @@ const mySearchArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { searchStr, dataNum } = req.body; 
@@ -228,7 +228,7 @@ const deleteArticle = async (req, res) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     try {
         const { deleteList } = req.body; 

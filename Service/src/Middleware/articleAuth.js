@@ -10,7 +10,7 @@ const saveArticle = async (req, res, next) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     console.log(req.body)
     const query = `SELECT * FROM "Articles" WHERE "title" = $1 AND "author" = $2 AND "id" != $3` 
@@ -38,7 +38,7 @@ const createArticle = async (req, res, next) => {
         database: process.env.databaseName,
         password: process.env.password,
         port: process.env.dbport,
-        ssl: true
+        // ssl: true
     });
     console.log(req.body)
     const query = `SELECT * FROM "Articles" WHERE "title" = $1 AND "author" = $2 ` 

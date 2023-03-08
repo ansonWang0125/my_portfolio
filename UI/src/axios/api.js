@@ -11,27 +11,32 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 const envRequest = axios.create({
   // baseURL: 'https://post-articles.onrender.com/api/env',
-  baseURL: 'http://localhost:8080/api/env',
+  // baseURL: 'http://localhost:8080/api/env',
+  baseURL: 'http://localhost:8080/api/env'
 });
 
 const imageRequest = axios.create({
   // baseURL: 'https://post-articles.onrender.com/api/image',
-  baseURL: 'http://localhost:8080/api/image',
+  // baseURL: 'http://localhost:8080/api/image',
+  baseURL: 'http://localhost:8080/api/image'
 });
 
 const userRequest = axios.create({
     // baseURL: 'https://post-articles.onrender.com/api/users',
-    baseURL: 'http://localhost:8080/api/users',
+    // baseURL: 'http://localhost:8080/api/users',
+    baseURL: 'http://localhost:8080/api/users'
 });
 
 const articleRequest = axios.create({
   // baseURL: 'https://post-articles.onrender.com/api/article',
+  // baseURL: 'http://localhost:8080/api/article',
   baseURL: 'http://localhost:8080/api/article',
 });
 
 const dataRequest = axios.create({
   // baseURL: 'https://post-articles.onrender.com/api/data',
-  baseURL: 'http://localhost:8080/api/data',
+  // baseURL: 'http://localhost:8080/api/data',
+  baseURL: 'http://localhost:8080/api/data'
 });
 
 export const apiUploadImage = data => imageRequest.post('/upload', data);
