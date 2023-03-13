@@ -10,7 +10,7 @@ if ( getAuthToken() )
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
 
 const verifyRequest = axios.create({
-  baseURL: 'https://post-articles.onrender.com/api/env',
+  baseURL: 'https://post-articles.onrender.com/api/verify',
   // baseURL: 'http://localhost:8080/api/verify'
 });
 
