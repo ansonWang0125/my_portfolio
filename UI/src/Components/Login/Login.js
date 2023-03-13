@@ -26,7 +26,6 @@ export default function Login() {
     const [notfound, setNotFound] = useState(false);
     const [passworderror, setPassworderError] = useState(false);
     const [click, setClick] = useState();
-    // const [error, setError] = useState(false);
     const {setData} = useData();
     const {changeLogin} = UseLoginContext();
     const {changeRoot} = UseRootContext();

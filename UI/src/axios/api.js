@@ -9,6 +9,11 @@ if ( getAuthToken() )
   token = getAuthToken()
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
 
+const verifyRequest = axios.create({
+  // baseURL: 'https://post-articles.onrender.com/api/env',
+  baseURL: 'http://localhost:8080/api/verify'
+});
+
 const envRequest = axios.create({
   // baseURL: 'https://post-articles.onrender.com/api/env',
   baseURL: 'http://localhost:8080/api/env'
@@ -36,6 +41,8 @@ const dataRequest = axios.create({
 
 export const apiUploadImage = data => imageRequest.post('/upload', data);
 export const apiGetImage = id => imageRequest.get('/get/'+id);
+
+export const apiVerify = data => verifyRequest.post('/verifypw', data);
 
 export const apiGetEnv = data => envRequest.post('/getenv', data);
 

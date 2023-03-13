@@ -2,6 +2,7 @@ const sequelize = require('sequelize');
 const dotenv = require('dotenv');
 require('dotenv').config();
 const db = require('./Model')
+const verifyRoutes = require('./Routes/verifyRoutes')
 const envRoutes = require('./Routes/envRoutes')
 const userRoutes = require('./Routes/userRoutes')
 const articleRoutes = require('./Routes/articleRoutes')
@@ -28,6 +29,7 @@ db.sequelize.sync().then(() => {    //drop table if exists
     console.log("db has been sync")
 })
 
+app.use('/api/verify', verifyRoutes)
 app.use('/api/env', envRoutes)
 app.use('/api/image', imageRoutes)
 app.use('/api/users', userRoutes)
