@@ -27,6 +27,7 @@ const Icon = () => {
     const [verifyClick, setVerifyClick] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [hasverify, setVerify] = useState(false);
+    const [error, setError] = useState(false);
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
@@ -60,17 +61,17 @@ const Icon = () => {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             })}
-        if (hasverify && verifyClick) {
+        if (hasverify) {
             toast.success('驗證成功 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             }); navigate(loginData.link)}
-        if (!hasverify && verifyClick) {
+        if (error) {
             toast.info('驗證失敗 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             })}
-    }, [login, click, hasverify, verifyClick, loginData.link, navigate])
+    }, [login, click, hasverify, verifyClick, loginData.link, navigate, error])
 
     const logout = () =>{
         localStorage.removeItem('user');
@@ -92,15 +93,18 @@ const Icon = () => {
 
     const handleVerify = async (e) => {
         e.preventDefault()
-        setVerifyClick(!verifyClick)
         if (password){
             const response = await verifyRequest({password})
             if (response.success) {
                 setVerify(true)
+                setError(false)
                 setOpen(false);
+                setVerifyClick(!verifyClick)
             }else {
                 setVerify(false)
+                setError(true)
                 setOpen(false);
+                setVerifyClick(!verifyClick)
             }
         }
     }
