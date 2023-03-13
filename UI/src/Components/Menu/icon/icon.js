@@ -141,7 +141,7 @@ const Icon = () => {
                 }
             </div>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>Please Enter Verify Password</DialogTitle>
                 <DialogContent>
                 <DialogContentText>
                     To login to this website, please enter the password. You can get the password from the administrator of the website.
