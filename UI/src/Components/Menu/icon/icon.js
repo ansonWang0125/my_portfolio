@@ -29,6 +29,7 @@ const Icon = () => {
     const [hasverify, setVerify] = useState(false);
     const [error, setError] = useState(false);
     const [password, setPassword] = useState("");
+    const [isclicking, setIsclicking] = useState(false);
     const navigate = useNavigate();
 
     async function verifyRequest (credentials)  {
@@ -56,7 +57,7 @@ const Icon = () => {
     }
 
     useEffect ( () => {
-        if (!login && click) {
+        if (!login && click && isclicking) {
             toast.success('已登出 ! ', {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
@@ -71,7 +72,9 @@ const Icon = () => {
                 position:toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             })}
-    }, [login, click, hasverify, verifyClick, loginData.link, navigate, error])
+        if (isclicking)
+            setIsclicking(false)
+    }, [login, click, hasverify, verifyClick, loginData.link, navigate, error, isclicking])
 
     const logout = () =>{
         localStorage.removeItem('user');
