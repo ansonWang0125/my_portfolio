@@ -83,7 +83,7 @@ const Icon = () => {
     }
 
     const handleLogout = async e => {
-        //e.preventDefault(); // 停止事件
+        setIsclicking(true)
         setClick(!click)
         logout()
     }
