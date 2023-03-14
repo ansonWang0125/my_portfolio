@@ -15,7 +15,7 @@ export default function Profile () {
         <div className="profile">
             <Routes>
                 <Route path="/" element={<SearchPage/>} />
-                <Route path="/:id" element={<Post /> } />
+                <Route path="/i*" element={<Post /> } />
             </Routes>
         </div>
     )

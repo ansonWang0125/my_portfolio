@@ -9,12 +9,13 @@ import dayjs from 'dayjs';
 import './Post.css'
 import { apiArticlePost } from '../../axios/api';
 import ImageToolBar from '../EditComponent/ImageToolBar';
+import useQuery from '../../hook/useQuery'
 
 const  Post = () =>{
 
     const location = useLocation()
-    const href = window.location.href
-    const id = href.substring(href.lastIndexOf('/')+1).split("=")[1]
+    const query = useQuery()
+    const id = query.value.id
 
     const[editorStateTitle, setEditorStateTitle] = useState(EditorState.createEmpty())
     const[editorStateContent, setEditorStateContent] = useState(EditorState.createEmpty())

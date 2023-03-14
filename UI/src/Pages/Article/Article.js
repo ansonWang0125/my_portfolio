@@ -14,7 +14,7 @@ const Article = () => {
         <div className="article">
             <Routes>
                 <Route path="/" element={<SearchPage/>} />
-                <Route path="/:id" element={<Post /> } />
+                <Route path="/i*" element={<Post /> } />
             </Routes>
         </div>
     );

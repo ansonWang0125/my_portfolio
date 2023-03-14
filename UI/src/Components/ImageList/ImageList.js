@@ -204,7 +204,7 @@ export default function ImageList () {
                                                 <ListItemText
                                                     primary= { 
                                                                 <>
-                                                                <NavLink to={`/Image/${image.id}`} 
+                                                                <NavLink to={`/Image/i?id=${image.id}`} 
                                                                         className='listitem'
                                                                         state={{originalname:image.originalname}}>
                                                                 {image.originalname}</NavLink> 

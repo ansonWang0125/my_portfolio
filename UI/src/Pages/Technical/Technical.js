@@ -14,7 +14,7 @@ const Technical = () => {
         <div className="Technical">
             <Routes>
                 <Route path="/" element={<SearchPage/>} />
-                <Route path="/:id" element={<Post /> } />
+                <Route path="/i*" element={<Post /> } />
             </Routes>
         </div>
     );

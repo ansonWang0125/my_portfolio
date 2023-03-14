@@ -59,7 +59,7 @@ const Main = () => {
                     <DataManagement/>
                   </ProtectedRoot>}/>
               <Route 
-                path="Image/:d"  
+                path="Image/i*"  
                 element={
                   <ProtectedRoot>
                     <Image/>

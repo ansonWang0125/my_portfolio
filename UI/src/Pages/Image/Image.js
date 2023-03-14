@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { apiGetImage } from '../../axios/api';
 import { Buffer } from 'buffer';
 import { useLocation } from 'react-router-dom';
+import useQuery from '../../hook/useQuery';
 import './Image.css'
 
 const Image = () => {
@@ -9,9 +10,8 @@ const Image = () => {
     const [srcValue, setSrcValue] = useState()
     const location = useLocation()
     const originalname = (location.state !== null ? location.state.originalname : 'undefined');
-    const href = window.location.href
-    console.log(href)
-    const id = href.substring(href.lastIndexOf('/')+1)
+    const query = useQuery()
+    const id = query.value.id
     console.log(id)
 
     async function getImage (credentials)  {
