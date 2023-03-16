@@ -73,7 +73,7 @@ const CreateArticle = () =>{
                 setHasCreate(false)
                 setIncorrect(false)
                 setSuccess(true)
-                navigate(`/${category}_Articles/?id=${response.articleInform.id}`,{state : {id:response.articleInform.id, readOnly:false}})
+                navigate(`/${category}_Articles/i?id=${response.articleInform.id}`,{state : {id:response.articleInform.id, readOnly:false}})
             }else if ( !response.success){
                 if ( response.message === "Something went wrong") {
                     setSuccess(false)
