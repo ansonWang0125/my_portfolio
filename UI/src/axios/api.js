@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { getAuthToken } from '../Cookies/cookies';
+// jest.mock('axios');
+import axios from 'axios';
 
 
 var token = ''

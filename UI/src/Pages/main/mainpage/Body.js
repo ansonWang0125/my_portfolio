@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import dayjs from 'dayjs';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import 'intersection-observer';
 
 const Body = () => {
 

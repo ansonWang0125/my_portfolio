@@ -2,21 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import './css/login.css';
 import { useNavigate, NavLink, useLocation } from "react-router-dom"
 // import bcrypt from 'bcryptjs';
-import useData from '../App/useData';
-import {UseLoginContext} from '../../Context/LoginCnt'
+import useData from '../App/useData.js';
+import {UseLoginContext} from '../../Context/LoginCnt.js'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {apiUserLogin} from '../../axios/api';
+import {apiUserLogin} from '../../axios/api.js';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { ReactComponent as GoogleLogo } from '../../assets/google.svg';
-import { getGoogleUrl } from '../../utils/getGoogleUrl';
-import { UseEnvContext } from '../../Context/envCnt';
-import { EnvContextProvider } from '../../Context/envCnt'; 
-import { UseRootContext } from '../../Context/RootCnt';
+import { getGoogleUrl } from '../../utils/getGoogleUrl.js';
+import { UseEnvContext } from '../../Context/envCnt.js';
+import { EnvContextProvider } from '../../Context/envCnt.js'; 
+import { UseRootContext } from '../../Context/RootCnt.js';
 
 
 export default function Login() {
