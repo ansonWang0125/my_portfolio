@@ -29,7 +29,7 @@ echo 'the file ".pidfile".'
 set -x
 yarn start &
 sleep 1
-echo $! > .pidfile
+echo $! > ../.pidfile
 set +x
 
 echo 'Now...'
