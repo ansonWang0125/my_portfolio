@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ansonWang0125/my_portfolio/issues"
   },
-  "homepage": "https://github.com/ansonWang0125/my_portfolio#readme"
+  "homepage": "https://github.com/ansonWang0125/my_portfolio#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
 }
