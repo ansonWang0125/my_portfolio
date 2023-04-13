@@ -6,12 +6,16 @@ echo '"/var/jenkins_home/workspace/simple-node-js-react-app" directory),'
 echo 'correctly bundles React in production mode and optimizes the build for'
 echo 'the best performance.'
 set -x
-cd Service &
+cd Service
+set +x
+set -x
 npm start
 set +x
 set -x
-cd ../UI &
-yarn run build
+cd ../UI
+set +x
+set -x
+yarn build
 set +x
 
 echo 'The following "npm" command runs your Node.js/React application in'
