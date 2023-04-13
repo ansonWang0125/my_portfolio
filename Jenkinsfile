@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'cd UI && chmod u+x *.sh && ../jenkins/scripts/test.sh'
+                sh 'cd UI && chmod u+x ../jenkins/scripts/*.sh && ../jenkins/scripts/test.sh'
             }
         }
         stage('Deliver') { 
