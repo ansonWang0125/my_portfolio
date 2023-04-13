@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh 'cd UI && ../jenkins/scripts/test.sh'
             }
         }
         stage('Deliver') { 
