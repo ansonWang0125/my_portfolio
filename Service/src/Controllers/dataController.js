@@ -82,13 +82,12 @@ const getAllData = async (req, res) => {
     });
     try {
         const articleQuery = `SELECT * FROM "Articles" ; `
-        const imagesQuery = `SELECT * FROM "Images" ; `
         const usersQuery = `SELECT * FROM "Users"; `
         await client.connect();
         const articles = await client.query(articleQuery)
         const images = await client.query(imagesQuery)
         const users = await client.query(usersQuery)
-        return res.status(201).send({success:true,articles:articles.rows, images:images.rows, users:users.rows});
+        return res.status(201).send({success:true,articles:articles.rows, users:users.rows});
     }catch (err) {
         console.log('get data error');
         console.log(err);

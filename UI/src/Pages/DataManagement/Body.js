@@ -52,7 +52,7 @@ export default function Body() {
     const fetchData = async () => {
         const response = await getData();
         if (response.success) {
-            return {users: response.users, articles: response.articles, images: response.images}
+            return {users: response.users, articles: response.articles}
         }else{
             console.log('error')
         }
