@@ -71,7 +71,35 @@ const deleteData = async (req, res) => {
 
 }
 
+const getAllData = async (req, res) => {
+    const client = new Client({
+        host: process.env.host,
+        user: process.env.user,
+        database: process.env.databaseName,
+        password: process.env.password,
+        port: process.env.dbport,
+        ssl: true
+    });
+    try {
+        const articleQuery = `SELECT * FROM "Articles" ; `
+        const imagesQuery = `SELECT * FROM "Images" ; `
+        const usersQuery = `SELECT * FROM "Users"; `
+        await client.connect();
+        const {articles} = await client.query(articleQuery)
+        const {images} = await client.query(imagesQuery)
+        const {users} = await client.query(usersQuery)
+        return res.status(201).send({success:true,articles:articles, images:images, users:users});
+    }catch (err) {
+        console.log('show data error');
+        console.log(err);
+    }finally {
+        client.end();
+    }
+
+}
+
 module.exports = {
     showData,
     deleteData,
+    getAllData,
 }
