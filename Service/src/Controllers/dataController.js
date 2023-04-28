@@ -1,5 +1,6 @@
 require('dotenv').config()
 const { Client } = require('pg');
+const { jsonToSQL } = require("../migrations/manualSQL")
 
 const showData = async (req, res) => {
     const client = new Client({
@@ -85,7 +86,6 @@ const getAllData = async (req, res) => {
         const usersQuery = `SELECT * FROM "Users"; `
         await client.connect();
         const articles = await client.query(articleQuery)
-        const images = await client.query(imagesQuery)
         const users = await client.query(usersQuery)
         return res.status(201).send({success:true,articles:articles.rows, users:users.rows});
     }catch (err) {
@@ -107,7 +107,8 @@ const createData = async (req, res) => {
         ssl: true
     });
     try {
-        const query = `SELECT * FROM "Articles" ; `
+        const sql = jsonToSQL()
+        const query = sql
         await client.connect();
         await client.query(query)
         return res.status(201).send({success:true});
