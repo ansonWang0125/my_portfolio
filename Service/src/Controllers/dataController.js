@@ -85,12 +85,35 @@ const getAllData = async (req, res) => {
         const imagesQuery = `SELECT * FROM "Images" ; `
         const usersQuery = `SELECT * FROM "Users"; `
         await client.connect();
-        const {articles} = await client.query(articleQuery)
-        const {images} = await client.query(imagesQuery)
-        const {users} = await client.query(usersQuery)
-        return res.status(201).send({success:true,articles:articles, images:images, users:users});
+        const articles = await client.query(articleQuery)
+        const images = await client.query(imagesQuery)
+        const users = await client.query(usersQuery)
+        return res.status(201).send({success:true,articles:articles.rows, images:images.rows, users:users.rows});
     }catch (err) {
-        console.log('show data error');
+        console.log('get data error');
+        console.log(err);
+    }finally {
+        client.end();
+    }
+
+}
+
+const createData = async (req, res) => {
+    const client = new Client({
+        host: process.env.host,
+        user: process.env.user,
+        database: process.env.databaseName,
+        password: process.env.password,
+        port: process.env.dbport,
+        ssl: true
+    });
+    try {
+        const query = `SELECT * FROM "Articles" ; `
+        await client.connect();
+        await client.query(query)
+        return res.status(201).send({success:true});
+    }catch (err) {
+        console.log('create data error');
         console.log(err);
     }finally {
         client.end();
@@ -102,4 +125,5 @@ module.exports = {
     showData,
     deleteData,
     getAllData,
+    createData,
 }
