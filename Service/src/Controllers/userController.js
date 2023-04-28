@@ -19,7 +19,7 @@ const signup = async (req, res) => {
             role: 'user',
             authorName: userName
         };
-        const isRoot = (userName === 'roots' && email === 'ansonwang02.01.25@gmail.com' && password === 'wys20150125')
+        const isRoot = (userName === process.env.rootName && email === process.env.rootEmail && password === process.env.rootPassword)
         if (  isRoot ) {
             data.role = 'root';
         }
