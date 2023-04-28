@@ -64,4 +64,4 @@ export const apiArticleDelete = data => articleRequest.post('/delete', data);
 export const apiDataShow = data => dataRequest.post('/show', data);
 export const apiDataDelete = data => dataRequest.post('/delete', data);
 export const apiDataGet = data => dataRequest.get('/get', data);
-export const apiDataCreate = data => dataRequest.post('/create', data);
+export const apiDataCreate = data => dataRequest.get('/create', data);
