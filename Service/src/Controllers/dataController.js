@@ -110,7 +110,7 @@ const createData = async (req, res) => {
         const sql = jsonToSQL()
         const query = sql
         await client.connect();
-        client.query(query)
+        await client.query(query)
         return res.status(201).send({success:true});
     }catch (err) {
         console.log('create data error');
