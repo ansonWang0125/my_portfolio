@@ -12,14 +12,14 @@ const showData = async (req, res) => {
         ssl: true
     });
     try {
-        console.log('show data', req.body)
+        // console.log('show data', req.body)
         const articleQuery = `SELECT "Articles"."id", "title", "author", "time", "category", "createTime", "Users"."authorName", "searchTimes" FROM "Articles" LEFT JOIN "Users" ON "Users"."id" = "Articles"."userID" ; `
         const imagesQuery = `SELECT "Images"."id", "articleID", "originalname", "Articles"."title" FROM "Images" LEFT JOIN "Articles" ON "Articles"."id" = "Images"."articleID" ; `
         const usersQuery = `SELECT "id", "userName", "email", "googleName", "role", "verified", "authorName" FROM "Users"; `
         const query = req.body.type === 'Articles' ? articleQuery : req.body.type === 'Images' ? imagesQuery : usersQuery
         await client.connect();
         const {rows} = await client.query(query)
-        console.log(rows)
+        // console.log(rows)
         if (rows.length > 0) {
             return res.status(201).send({success:true,inform:rows});
         } else {
