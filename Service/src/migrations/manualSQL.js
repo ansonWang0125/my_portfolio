@@ -12,7 +12,7 @@ const jsonToSQL = () =>{
     sql = ``
 
     data.users.forEach(user => sql += `INSERT INTO "Users" ("id", "userName", "email", "googleName", "password", "role", "photo", "verified", "provider", "authorName", "createdAt", "updatedAt") VALUES ('${user.id}', '${user.userName}', '${user.email}', '${user.googleName}', '${user.password}', '${user.role}', '${user.photo}', '${user.verified}', '${user.provider}', '${user.authorName}', '${user.createdAt}', '${user.updatedAt}'); `)
-    data.articles.forEach(article => sql += `INSERT INTO "Articles" ("id", "category", "title", "titleState", "author", "authorState", "time", "content", "createTime", "searchTimes", "userID") VALUES ('${article.id}', '${article.category}', '${article.title}', ''${JSON.stringify(article.titleState).replaceAll("'","\\\"")}', '${article.author}', ''${JSON.stringify(article.authorState).replaceAll("'","\\\"")}', '${article.time}', '${JSON.stringify(article.content).replaceAll("'","\\\"")}', '${article.createTime}', '${article.searchTimes}', '${article.userID}'); `)
+    data.articles.forEach(article => sql += `INSERT INTO "Articles" ("id", "category", "title", "titleState", "author", "authorState", "time", "content", "createTime", "searchTimes", "userID") VALUES ('${article.id}', '${article.category}', '${article.title}', ''${String(JSON.stringify(article.titleState)).replaceAll("'","\\\"")}', '${article.author}', ''${String(JSON.stringify(article.authorState)).replaceAll("'","\\\"")}', '${article.time}', '${String(JSON.stringify(article.content)).replaceAll("'","\\\"")}', '${article.createTime}', '${article.searchTimes}', '${article.userID}'); `)
     return sql
 }
 
