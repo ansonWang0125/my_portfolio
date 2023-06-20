@@ -11,9 +11,6 @@ const imageRoutes = require('./Routes/imageRoutes')
 const dataRoutes = require('./Routes/dataRoutes')
 const path = require('path')
 
-
-
-
 const PORT = process.env.PORT ||10000
 
 const express = require("express");
