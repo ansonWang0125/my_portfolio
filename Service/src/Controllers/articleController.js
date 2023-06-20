@@ -43,7 +43,7 @@ const createArticle = async (req, res) => {
         const user = req.user;
         const authorName = author.blocks[0].text
         await client.connect();
-        const id = client.query(idQuery)
+        const id = client.query(idQuery) + 1
         const data = {
             id,
             category,
