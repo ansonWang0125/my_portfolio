@@ -52,7 +52,7 @@ const createArticle = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log('saveArticles error');
+        console.log('create Articles error');
         console.log(error);
     } finally {
         client.end();

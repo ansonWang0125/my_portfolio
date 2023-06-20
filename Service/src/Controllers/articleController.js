@@ -29,7 +29,7 @@ const saveArticle = async (req, res) => {
 }
 const createArticle = async (req, res) => {
     console.log(req.body)
-    const idQuery = `SELECT MAX(id) FROM "Articles;` 
+    const idQuery = `SELECT MAX(id) FROM "Articles";` 
     const client = new Client({
         host: process.env.host,
         user: process.env.user,
@@ -43,7 +43,11 @@ const createArticle = async (req, res) => {
         const user = req.user;
         const authorName = author.blocks[0].text
         await client.connect();
-        const id = client.query(idQuery) + 1
+        const {rows} = await client.query(idQuery)
+        // console.log(rows[0])
+        const id = rows[0]['max'] + 1
+        // console.log(id)
+        // console.log(typeof(id))
         const data = {
             id,
             category,
